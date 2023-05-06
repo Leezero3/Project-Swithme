@@ -1,5 +1,4 @@
 import React from 'react'
-import Layout from '../../common/feature/Layout'
 import styled from 'styled-components'
 import peopleImg from '../../assets/home-banner-people.png'
 
