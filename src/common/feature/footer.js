@@ -1,12 +1,9 @@
 import React from 'react'
-import Layout from './layout';
+import styled from 'styled-components'
 
 function footer() {
   return (
     <Footer>
-        <Layout>
-
-        </Layout>
     </Footer>
   )
 }
