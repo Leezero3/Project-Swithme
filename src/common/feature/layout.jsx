@@ -1,19 +1,17 @@
-import React from 'react'
-import styled from 'styled-components';
-import Header from './header';
-import Footer from './footer';
+import React from "react";
+import styled from "styled-components";
+import { Footer, Header } from ".";
 
-function Layout({children}) {
-  return (
-    <StLayout>
-      <Header />
-      {children}
-      <Footer />
-    </StLayout>
-  )
+function Layout({ children }) {
+    return (
+        <StLayout>
+            <Header />
+            {children}
+            <Footer />
+        </StLayout>
+    );
 }
 
 export default Layout;
 
-const StLayout = styled.div`
-`
+const StLayout = styled.div``;

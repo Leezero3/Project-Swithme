@@ -16,6 +16,7 @@ function header() {
 
 export default header;
 
+
 const Header = styled.header`
     width:100%;
     max-width:1200px;
