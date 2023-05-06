@@ -1,7 +1,8 @@
+import Layout from "common/feature/layout";
 import React from "react";
 
 function DetailPost() {
-    return <div>DetailPost</div>;
+    return <Layout>DetailPost</Layout>;
 }
-햐;
+
 export default DetailPost;
