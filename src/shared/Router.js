@@ -1,19 +1,16 @@
 // import { formToJSON } from "axios";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import { Join, Login, NewPost, StudyGroupBoard } from "../pages";
-import { GlobalStyle } from "common/feature";
-import { DetailPost } from "pages/index";
+import { Join, Login, NewPost, StudyGroupBoard, DetailPost } from "pages/index";
 
 const Router = () => {
     return (
         <BrowserRouter>
-            <GlobalStyle />
             <Routes>
-                <Route path="/" element={<StudyGroupBoard />}></Route>
-                <Route path="/new-post" element={<NewPost />}></Route>
-                <Route path="/login" element={<Login />}></Route>
-                <Route path="/join" element={<Join />}></Route>
-                <Route path="/detail-post" element={<DetailPost />}></Route>
+                <Route path="/" element={<StudyGroupBoard />}/>
+                <Route path="/new-post" element={<NewPost />}/>
+                <Route path="/login" element={<Login />}/>
+                <Route path="/join" element={<Join />}/>
+                <Route path="/detail-post" element={<DetailPost />}/>
             </Routes>
         </BrowserRouter>
     );
