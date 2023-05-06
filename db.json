@@ -1,0 +1,20 @@
+{
+    "studyGroup": [
+        {
+            "id":1,
+            "type":"프로젝트",
+            "title":"리액트 심화과정 스터디원 모집",
+            "contents":"심화과정에서 어려움을 겪고 있는 항해 팀원들을 모집합니다.",
+            "date":"2023-04-05",
+            "memberNum":5
+        },
+        {
+            "id":2,
+            "type":"프로젝트",
+            "title":"next.js 스터디원 모집",
+            "contents":"next.js 스터디원 모집합니다. newt.js를 더 공부해보고 싶은 분들 모십니다.",
+            "date":"2023-04-03",
+            "memberNum":5
+        }
+    ]
+  }
