@@ -1,16 +1,13 @@
-import React from 'react'
-import styled from 'styled-components'
+import React from "react";
+import styled from "styled-components";
 
 function footer() {
-  return (
-    <Footer>
-    </Footer>
-  )
+    return <Footer></Footer>;
 }
 
-export default footer
+export default footer;
 
 const Footer = styled.footer`
-    width:100%;
-    background-color:#ccc;
-`
+    width: 100%;
+    background-color: #ccc;
+`;
