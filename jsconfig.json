@@ -1,6 +1,7 @@
 {
     "compilerOptions": {
+        "target": "esnext",
         "baseUrl": "src"
     },
-    "include": ["src"] // src 폴더 밑에 있는 것들은 다 절대 경로로 처리해주세요!
+    "include": ["src"]
 }
