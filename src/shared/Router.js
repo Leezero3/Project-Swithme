@@ -1,10 +1,10 @@
-import { formToJSON } from "axios";
+// import { formToJSON } from "axios";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import GlobalStyle from "../common/feature/GlobalStyles";
-import { Join, Login, NewPost, StudyGroupBoard } from '../pages'
+import { Join, Login, NewPost, StudyGroupBoard } from "../pages";
+import { GlobalStyle } from "common/feature";
 
 const Router = () => {
-    return(
+    return (
         <BrowserRouter>
             <GlobalStyle />
             <Routes>
@@ -14,7 +14,7 @@ const Router = () => {
                 <Route path="/Join" element={<Join />}></Route>
             </Routes>
         </BrowserRouter>
-    )
+    );
 };
 
 export default Router;
