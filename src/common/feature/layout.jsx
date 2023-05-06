@@ -4,14 +4,21 @@ import { Footer, Header } from ".";
 
 function Layout({ children }) {
     return (
-        <StLayout>
+        <>
             <Header />
-            {children}
+            <StLayout>{children}</StLayout>
             <Footer />
-        </StLayout>
+        </>
     );
 }
 
 export default Layout;
 
-const StLayout = styled.div``;
+const StLayout = styled.div`
+    max-width: 1200px;
+    margin: 30px auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* justify-content: space-between; */
+`;

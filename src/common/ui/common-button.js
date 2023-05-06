@@ -18,6 +18,12 @@ const buttonSizes = {
         minWidth: "100px",
         height: "35px",
     },
+    headerButton: {
+        fontWeight: "normal",
+        minWidth: "100px",
+        height: "35px",
+        padding: 0,
+    },
 };
 
 const ButtonStyle = styled.button`
