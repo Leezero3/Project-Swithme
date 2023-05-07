@@ -24,6 +24,18 @@ const buttonSizes = {
         height: "35px",
         padding: 0,
     },
+    postDetailApplyButton: {
+        fontWeight: "normal",
+        minWidth: "110px",
+        height: "110px",
+        padding: 0,
+    },
+    postDetailCommentButton: {
+        fontWeight: "normal",
+        minWidth: "110px",
+        height: "35px",
+        padding: 0,
+    },
 };
 
 const ButtonStyle = styled.button`

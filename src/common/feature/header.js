@@ -37,7 +37,7 @@ const Container = styled.div`
 `;
 
 const Wrapper = styled.header`
-    width: 100%;
+    width: 95%;
     max-width: 1200px;
     margin: 0 auto;
     height: 60px;
