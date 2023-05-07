@@ -7,10 +7,11 @@ function studyGroupBoard() {
     return (
         <div>
             <Banner />
+
             <Layout>
                 <Board />
             </Layout>
-        </div>
+                    <div/>
     );
 }
 

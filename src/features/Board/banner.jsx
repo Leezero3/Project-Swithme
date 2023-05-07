@@ -8,7 +8,7 @@ function Banner() {
             <div className="center-wrapper">
                 <div className="banner-text-contents">
                     <h1>너 내 동료가 되라!</h1>
-                    <p>OO에서 당신의 코딩 동료를 찾아보세요 🔍</p>
+                    <p>스윗미에서 당신의 코딩 동료를 찾아보세요 🔍</p>
                 </div>
                 <img src={peopleImg} alt="메인 배너 인물이미지" />
             </div>
