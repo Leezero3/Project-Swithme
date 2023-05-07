@@ -6,8 +6,8 @@ import Board from "features/Board/board";
 function studyGroupBoard() {
     return (
         <div>
+            <Banner />
             <Layout>
-                <Banner />
                 <Board />
             </Layout>
         </div>

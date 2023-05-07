@@ -1,5 +1,5 @@
 import React from "react";
-import Layout from "common/feature/layout";
+import { Layout } from "common/feature";
 import styled from "styled-components";
 import { RecruitmentTitle, ApplySection, RecruitmentInfo, Comments } from "features/DetailPage";
 

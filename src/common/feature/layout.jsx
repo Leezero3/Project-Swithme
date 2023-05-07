@@ -1,13 +1,11 @@
 import React from "react";
 import styled from "styled-components";
-import { Footer, Header } from ".";
+// 배너를 위해서 Header와 Footer는 shared/Router에서 호출
 
 function Layout({ children }) {
     return (
         <>
-            <Header />
             <StLayout>{children}</StLayout>
-            <Footer />
         </>
     );
 }

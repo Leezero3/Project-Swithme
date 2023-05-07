@@ -36,6 +36,12 @@ const buttonSizes = {
         height: "35px",
         padding: 0,
     },
+    joinLoginButton: {
+        fontWeight: "normal",
+        minWidth: "250px",
+        height: "40px",
+        padding: 0,
+    },
 };
 
 const ButtonStyle = styled.button`
