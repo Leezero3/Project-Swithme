@@ -16,11 +16,9 @@ function Badge({children, type, memberNum, totalMemberNum, closeDate, ...rest}) 
         let current = new Date();
         let dead = new Date(date);
         let calcDate = 0;
-        console.log(dead);
+
         if(dead > current){
             calcDate = dead.getTime() - current.getTime();
-        } else {
-            calcDate = current.getTime() - dead.getTime();
         }
         
         // 디데이 3일부터 마감임박 뱃지 부여
@@ -65,8 +63,9 @@ const CardBadge = styled.p`
     display:${(props) => props.badgeOn === true? "inline-block" : "none"};
     background-color:${(props) => BadgeStyle[props.type].backgroundColor};
     color: ${(props) => BadgeStyle[props.type].color};
-    padding:5px 15px;
-    margin-right:7px;
+    padding:5px 12px;
+    margin-right:5px;
+    font-size:16px;
     font-weight:bold;
     border-radius:15px;
 `

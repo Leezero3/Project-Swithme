@@ -17,6 +17,6 @@ const StLayout = styled.div`
     margin: 30px auto;
     display: flex;
     align-items: center;
-    justify-content: center;
-    /* justify-content: space-between; */
+    justify-content: center; 
+    /* justify-content: space-between;*/
 `;

@@ -5,8 +5,8 @@ import styled from "styled-components";
 const buttonSizes = {
     large: {
         fontWeight: "bold",
-        minWidth: "200px",
-        height: "40px",
+        minWidth: "300px",
+        height: "45px",
     },
     medium: {
         fontWeight: "normal",
@@ -20,7 +20,7 @@ const buttonSizes = {
     },
     headerButton: {
         fontWeight: "normal",
-        minWidth: "100px",
+        minWidth: "130px",
         height: "35px",
         padding: 0,
     },
@@ -50,6 +50,7 @@ const ButtonStyle = styled.button`
     min-width: ${(props) => buttonSizes[props.size].minWidth};
     height: ${(props) => buttonSizes[props.size].height};
 
+    font-size:18px;
     border: none;
     border-radius: 20px;
     cursor: pointer;

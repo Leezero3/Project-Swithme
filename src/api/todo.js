@@ -6,5 +6,10 @@ const getStudyList = async () => {
     return response.data;
 };
 
-export { getStudyList };
+// NewPost : 새로운 그룹 모집글 작성
+const addNewGroupPosting = async (newPost) => {
+    await axios.post(`${process.env.REACT_APP_SERVER_URL}/studyGroup`,newPost)
+}
+
+export { getStudyList, addNewGroupPosting };
 

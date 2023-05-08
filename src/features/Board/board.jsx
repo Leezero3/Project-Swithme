@@ -110,7 +110,7 @@ const CardTypeImg = styled.img`
 `
 const BadgeArea = styled.div`
     position:absolute;
-    bottom:40px;
+    bottom:30px;
 `
 
 
