@@ -23,9 +23,9 @@
             "type":"스터디",
             "title":"next.js 스터디원 모집",
             "contents":"next.js 스터디원 모집합니다. newt.js를 더 공부해보고 싶은 분들 모십니다.",
-            "date":"2023-04-03",
+            "date":"2023-05-10",
             "memberNum":5,
-            "totalMember":2
+            "totalMember":4
         },
         {
             "id":4,
@@ -41,7 +41,7 @@
             "type":"프로젝트",
             "title":"next.js 스터디원 모집",
             "contents":"next.js 스터디원 모집합니다. newt.js를 더 공부해보고 싶은 분들 모십니다.",
-            "date":"2023-04-03",
+            "date":"2023-05-10",
             "memberNum":5,
             "totalMember":2
         }

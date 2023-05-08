@@ -5,13 +5,13 @@ import Board from "features/Board/board";
 
 function studyGroupBoard() {
     return (
-        <div>
+        <>
             <Banner />
 
             <Layout>
                 <Board />
             </Layout>
-                    <div/>
+        </>
     );
 }
 
