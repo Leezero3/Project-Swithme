@@ -11,7 +11,7 @@ function studyGroupBoard() {
             <Layout>
                 <Board />
             </Layout>
-                    <div/>
+        </div>
     );
 }
 

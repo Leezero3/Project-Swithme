@@ -1,11 +1,11 @@
 import React from "react";
 import styled from "styled-components";
-import "material-icons/iconfont/material-icons.css";
+import { AiOutlineArrowLeft } from "react-icons/ai";
 
 function GobackButton() {
     return (
         <GoBackButton>
-            <span className="material-icons">arrow_back</span>
+            <AiOutlineArrowLeft />
         </GoBackButton>
     );
 }
