@@ -7,16 +7,15 @@ import study from '../../assets/board-study-book.png';
 import project from '../../assets/board-project-highfive.png';
 
 function Board() {
-    const {isLoading, isError, data} = useQuery("todos", getStudyList);
+    const { isLoading, isError, data } = useQuery("todos", getStudyList);
     console.log(data);
 
-    if(isLoading){
-        return <h1>로딩중입니다...</h1>
+    if (isLoading) {
+        return <h1>로딩중입니다...</h1>;
     }
-    if(isError){
-        return <h1>오류가 발생하였습니다...</h1>
+    if (isError) {
+        return <h1>오류가 발생하였습니다...</h1>;
     }
-
     //게시글 정원임박 뱃지
     const popular = (current, total) => {
         if(current - total === 1){

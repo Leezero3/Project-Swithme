@@ -7,3 +7,4 @@ const getStudyList = async () => {
 };
 
 export { getStudyList };
+

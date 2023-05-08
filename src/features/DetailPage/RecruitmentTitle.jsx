@@ -1,65 +1,55 @@
 import React from "react";
 import styled from "styled-components";
-import { CommonButton } from "common/ui";
 
-function Comments() {
+function RecruitmentTitle() {
     return (
         <Container>
-            <CommentForm>
-                <StyledInput placeholder="코멘트를 남겨주세요." />
-                <CommonButton size="postDetailCommentButton">댓글달기</CommonButton>
-            </CommentForm>
-            <CommentList>
-                <div>리액트 스터디 참여하고 싶습니다. 추가 모집 안하나요?</div>
+            <Title>리액트 숙련 주차 과제를 하며 같이 강의 공부할 스터디원 구합니다! </Title>
+            <PostMetaSectionWrapper>
+                <AuthorWrapper>
+                    <p>작성자</p>
+                    <p>14기 김진영</p>
+                </AuthorWrapper>
                 <ButtonWrapper>
                     <EditDeleteButton>수정</EditDeleteButton>
                     <ButtonSeperator />
                     <EditDeleteButton>삭제</EditDeleteButton>
                 </ButtonWrapper>
-            </CommentList>
+            </PostMetaSectionWrapper>
         </Container>
     );
 }
 
-export default Comments;
+export default RecruitmentTitle;
 
 const Container = styled.div`
-    width: 99%;
-    margin: 30px 0 20px 0;
+    width: 100%;
     min-height: 80px;
-    display: flex;
-    flex-direction: column;
     /* border: 1px solid black; */
-    align-items: center;
+    padding: 10px;
 `;
 
-const CommentForm = styled.div`
-    width: 100%;
-    height: 30px;
+const Title = styled.div`
+    width: 97%;
+    font-size: 30px;
+    font-weight: 600;
+`;
+
+const PostMetaSectionWrapper = styled.div`
     display: flex;
     align-items: center;
     justify-content: space-between;
+    margin-top: 10px;
 `;
 
-const StyledInput = styled.input`
-    width: 910px;
-    height: 25px;
-    border-radius: 4px;
-    font-size: 14px;
-    border: 1px solid #c4c4c4;
-
-    &::placeholder {
-        text-indent: 5px;
+const AuthorWrapper = styled.div`
+    font-size: 15px;
+    min-width: 200px;
+    display: flex;
+    align-items: center;
+    p:last-child {
+        margin-left: 20px;
     }
-`;
-
-const CommentList = styled.div`
-    width: 100%;
-    height: 30px;
-    margin-top: 40px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
 `;
 
 const ButtonWrapper = styled.div`
