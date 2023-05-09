@@ -1,8 +1,10 @@
 import React from "react";
 import styled from "styled-components";
 import { useNavigate } from 'react-router-dom';
+import { useMutation, useQuery, useQueryClient } from 'react-query'
+import { deleteGroupPosting } from "api/todo";
 
-function RecruitmentTitle({title, nickname, userId, boardContents, createAt}) {
+function RecruitmentTitle({title, nickname, userId, boardId, createAt}) {
     // 현재 접속한 myId와 작성자의 userId가 일치하면 수정|삭제 가능하도록
     const AmIWriter = (userId) =>{
         const myId = localStorage.userID;
@@ -12,8 +14,24 @@ function RecruitmentTitle({title, nickname, userId, boardContents, createAt}) {
             return false;
         }
     };
-    console.log(boardContents);
     const navigate = useNavigate();
+    const queryClient = useQueryClient();
+
+    const mutation = useMutation(deleteGroupPosting,{
+        onSuccess: () => {
+          queryClient.invalidateQueries('todos');
+          alert('모집 글이 삭제되었습니다!');
+          navigate('/');
+        },
+        onError: (error) => {
+          alert('글 삭제가 실패했습니다 ㅜㅠ');
+        }
+    });
+
+    const removeHandler = () => {
+        mutation.mutate(boardId);
+    };
+    
     return (
         <Container>
             <Title>{title}</Title>
@@ -24,9 +42,9 @@ function RecruitmentTitle({title, nickname, userId, boardContents, createAt}) {
                     <p> | {createAt}</p>
                 </AuthorWrapper>
                 <ButtonWrapper show={AmIWriter(userId)}>
-                    <EditDeleteButton onClick={() => navigate('/new-post',{state: boardContents})}>수정</EditDeleteButton>
+                    <EditDeleteButton onClick={() => navigate('/new-post',{state: boardId})}>수정</EditDeleteButton>
                     <ButtonSeperator />
-                    <EditDeleteButton>삭제</EditDeleteButton>
+                    <EditDeleteButton onClick={() => removeHandler()}>삭제</EditDeleteButton>
                 </ButtonWrapper>
             </PostMetaSectionWrapper>
         </Container>

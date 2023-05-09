@@ -13,37 +13,11 @@
       "id": 2,
       "type": "project",
       "title": "next.js 프로젝트 모집",
+      "date": "2023. 4. 3.",
+      "totalMember": 1,
       "contents": "next.js 프로젝트 모집합니다. newt.js를 더 공부해보고 싶은 분들 모십니다.",
-      "date": "2023-04-03",
-      "memberNum": 5,
-      "totalMember": 1
-    },
-    {
-      "id": 3,
-      "type": "study",
-      "title": "next.js 스터디원 모집",
-      "contents": "next.js 스터디원 모집합니다. newt.js를 더 공부해보고 싶은 분들 모십니다.",
-      "date": "2023-05-10",
-      "memberNum": 5,
-      "totalMember": 4
-    },
-    {
-      "id": 4,
-      "type": "project",
-      "title": "next.js 스터디원 모집",
-      "contents": "next.js 스터디원 모집합니다. newt.js를 더 공부해보고 싶은 분들 모십니다.",
-      "date": "2023-04-03",
-      "memberNum": 5,
-      "totalMember": 2
-    },
-    {
-      "id": 5,
-      "type": "project",
-      "title": "next.js 스터디원 모집",
-      "contents": "next.js 스터디원 모집합니다. newt.js를 더 공부해보고 싶은 분들 모십니다.",
-      "date": "2023-05-10",
-      "memberNum": 5,
-      "totalMember": 2
+      "startDate": "2023-04-03T00:00:00.000Z",
+      "memberCounter": 1
     },
     {
       "type": "study",
@@ -51,8 +25,16 @@
       "date": "2023. 5. 11.",
       "memberNum": 5,
       "totalMember": 3,
-      "contnets": "타입스크립트 스터디 하실 분 구해요! 저도 왕초보랍니다~",
+      "contents": "타입스크립트 스터디 하실 분 구해요! 저도 왕초보랍니다~",
       "id": 45
+    },
+    {
+      "type": "study",
+      "title": "리액트 나머지공부하실 깍두기 구합니다",
+      "date": "2023. 6. 2.",
+      "totalMember": 3,
+      "contents": "리액트 너무 어렵네요 다시 공부하실 깍두기 구해요",
+      "id": 46
     }
   ]
 }
