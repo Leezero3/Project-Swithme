@@ -22,8 +22,8 @@ function Header() {
                     >
                         모임 만들기
                     </CommonButton>
-                    <StyledLink to="/Login">Login</StyledLink>
-                    <StyledLink to="/Join">Sign up</StyledLink>
+                    <StyledLink to="/login">Login</StyledLink>
+                    <StyledLink to="/join">Sign up</StyledLink>
                 </StyledNav>
             </Wrapper>
         </Container>
