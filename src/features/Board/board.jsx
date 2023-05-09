@@ -1,5 +1,5 @@
 import { getStudyList } from 'api/todo';
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useQuery } from 'react-query';
 import { CiCircleChevRight } from "react-icons/ci";
 import styled, { css } from 'styled-components';
@@ -9,26 +9,25 @@ import Badge from './badge';
 import { useNavigate } from 'react-router-dom';
 
 function Board() {
-    const navigate = useNavigate();
     const { isLoading, isError, data } = useQuery("todos", getStudyList);
-    console.log(data);
+    const navigate = useNavigate();
 
     if (isLoading) {
         return <h1>로딩중입니다...</h1>;
-    }
+    };
     if (isError) {
         return <h1>오류가 발생하였습니다...</h1>;
-    }
-    
-    const goDetailPage = (id) =>{
-        navigate(`/detail-post${id}`,{ replace: true });
     };
-    
+    const goDetailPage = (item) =>{
+        // console.log(state)
+        navigate(`/detail/${item.id}`);
+    };
+
   return (
     <CardContainer>
         {data.map((item) => 
-            <Card key={item.id} onClick={() => goDetailPage(item.id)}>
-                <CardTypeImg src={item.type === "프로젝트"? project : study} alt="게시물 타입"/>
+            <Card key={item.id} onClick={() => goDetailPage(item)}>
+                <CardTypeImg src={item.type === "project"? project : study} alt="게시물 타입"/>
                 <CiCircleChevRight className='GoDetail'/>
                 <CardTitle>{item.title}</CardTitle>
                 <CardDate>마감 : {item.date}</CardDate>
@@ -42,8 +41,8 @@ function Board() {
             </Card>        
         )}
     </CardContainer>
-  )
-}
+  );
+};
 
 export default Board;
 

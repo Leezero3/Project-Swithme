@@ -2,22 +2,22 @@ import React from "react";
 import styled from "styled-components";
 import { CommonButton } from "common/ui";
 
-function ApplySection() {
+function ApplySection({date, totalMember, memberNum, applyUsers}) {
     return (
         <Container>
             <div>
-                <div>
-                    <RecruitmentText>모집 기한</RecruitmentText>
-                    <RecruitmentText>2023. 05. 05 - </RecruitmentText>
-                </div>
                 <RecruitmentDataWapper>
-                    <RecruitmentText>모집 인원</RecruitmentText>
-                    <RecruitmentText>4 / 5명</RecruitmentText>
+                    <RecruitmentText><b>모집 기한</b></RecruitmentText>
+                    <RecruitmentText>{date}</RecruitmentText>
                 </RecruitmentDataWapper>
                 <RecruitmentDataWapper>
-                    <RecruitmentText>참여 인원</RecruitmentText>
+                    <RecruitmentText><b>모집 인원</b></RecruitmentText>
+                    <RecruitmentText>{memberNum} / {totalMember}명</RecruitmentText>
+                </RecruitmentDataWapper>
+                <RecruitmentDataWapper>
+                    <RecruitmentText><b>참여 인원</b></RecruitmentText>
                     <RecruitmentText>
-                        14기 강준수,14기 이승현, 14기 유범모, 14기 조양기 님이 신청중입니다.
+                        {applyUsers}님이 신청중입니다.
                     </RecruitmentText>
                 </RecruitmentDataWapper>
             </div>
@@ -43,5 +43,5 @@ const RecruitmentDataWapper = styled.div`
 
 const RecruitmentText = styled.div`
     margin-right: 20px;
-    font-size: 15px;
+    font-size: 17px;
 `;

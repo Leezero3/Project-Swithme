@@ -1,14 +1,14 @@
 import React from "react";
 import styled from "styled-components";
 
-function RecruitmentTitle() {
+function RecruitmentTitle({title, nickname}) {
     return (
         <Container>
-            <Title>리액트 숙련 주차 과제를 하며 같이 강의 공부할 스터디원 구합니다! </Title>
+            <Title>{title}</Title>
             <PostMetaSectionWrapper>
                 <AuthorWrapper>
                     <p>작성자</p>
-                    <p>14기 김진영</p>
+                    <p>{nickname}</p>
                 </AuthorWrapper>
                 <ButtonWrapper>
                     <EditDeleteButton>수정</EditDeleteButton>

@@ -23,7 +23,7 @@ function Badge({children, type, memberNum, totalMemberNum, closeDate, ...rest}) 
         
         // 디데이 3일부터 마감임박 뱃지 부여
         if(Math.floor(calcDate / (1000*60*60*24)) < 4){
-            console.log('close', 'true');
+            // console.log('close', 'true');
             return true;
         } else {
             console.log(Math.floor(calcDate / (1000*60*60*24)));
