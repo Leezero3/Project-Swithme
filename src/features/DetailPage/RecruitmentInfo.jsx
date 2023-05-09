@@ -1,13 +1,10 @@
 import React from "react";
 import styled from "styled-components";
 
-function RecruitmentInfo() {
+function RecruitmentInfo({contents}) {
     return (
         <Container>
-            {`리액트 숙련주차 과제를 하며 같이 강의 공부할 스터디원 구합니다~ 
-            올나잇 에브리데이 행복하게 같이 할 사람 구해요. 
-
-            웰컴 투 코딩 나이트.............😇`}
+            {contents}
         </Container>
     );
 }

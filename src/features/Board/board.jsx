@@ -1,71 +1,48 @@
 import { getStudyList } from 'api/todo';
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useQuery } from 'react-query';
 import { CiCircleChevRight } from "react-icons/ci";
 import styled, { css } from 'styled-components';
 import study from '../../assets/board-study-book.png';
 import project from '../../assets/board-project-highfive.png';
+import Badge from './badge';
+import { useNavigate } from 'react-router-dom';
 
 function Board() {
     const { isLoading, isError, data } = useQuery("todos", getStudyList);
-    console.log(data);
+    const navigate = useNavigate();
 
     if (isLoading) {
         return <h1>로딩중입니다...</h1>;
-    }
+    };
     if (isError) {
         return <h1>오류가 발생하였습니다...</h1>;
-    }
-    //게시글 정원임박 뱃지
-    const popular = (current, total) => {
-        if(current - total === 1){
-            return true;
-        } else {
-            return false;
-        }
+    };
+    const goDetailPage = (item) =>{
+        // console.log(state)
+        navigate(`/detail/${item.id}`);
     };
 
-    //게시글 날짜임박 뱃지
-    const deadline = (date) => {
-        let current = new Date();
-        let dead = new Date(date);
-        let calcDate = 0;
-
-        if(dead > current){
-            calcDate = dead.getTime() - current.getTime();
-        } else {
-            calcDate = current.getTime() - dead.getTime();
-        }
-        
-        // 디데이 3일부터 마감임박 뱃지 부여
-        if(Math.floor(calcDate / (1000*60*60*24)) < 4){
-            return true;
-        } else {
-            return false;
-        }
-        
-    }
-    
-    
   return (
     <CardContainer>
         {data.map((item) => 
-            <Card key={item.id}>
-                <CardTypeImg src={item.type === "프로젝트"? project : study} alt="게시물 타입"/>
+            <Card key={item.id} onClick={() => goDetailPage(item)}>
+                <CardTypeImg src={item.type === "project"? project : study} alt="게시물 타입"/>
                 <CiCircleChevRight className='GoDetail'/>
                 <CardTitle>{item.title}</CardTitle>
                 <CardDate>마감 : {item.date}</CardDate>
                 <CardMember>인원 : <b>{item.memberNum}</b> / {item.totalMember}</CardMember>
                 {/* <CardContents>{item.contents}</CardContents> */}
                 <BadgeArea>
-                    <Badge color="red" badgeOn={popular(item.memberNum, item.totalMember)}>정원임박🔥</Badge>
-                    <Badge color="green" badgeOn={deadline(item.date)}>마감임박⏱️</Badge>
+                    <Badge type="groupType" groupType={item.type}>{item.type}</Badge>
+                    <Badge type="closeMember" memberNum={item.memberNum} totalMemberNum={item.totalMember}>정원임박🔥</Badge>
+                    <Badge type="closeDate" closeDate={item.date}>마감임박⏱️</Badge>
                 </BadgeArea>
             </Card>        
         )}
     </CardContainer>
-  )
-}
+  );
+};
 
 export default Board;
 
@@ -89,6 +66,7 @@ const Card = styled.div`
     border-radius:30px;
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
     transition:.3s;
+    cursor:pointer;
 
     & > .GoDetail{
         position:absolute;
@@ -131,33 +109,7 @@ const CardTypeImg = styled.img`
 `
 const BadgeArea = styled.div`
     position:absolute;
-    bottom:40px;
+    bottom:30px;
 `
-const BadgeStyle = {
-    red:{
-        color:"#d43936",
-        backgroundColor:"#ffe8e8"
-    },
-    green:{
-        color:"#3d630a",
-        backgroundColor:"#c0de9a"
-    }
-}
-const Badge = styled.span`
-    background-color:${(props) => BadgeStyle[props.color].backgroundColor};
-    color: ${(props) => BadgeStyle[props.color].color};
-    padding:5px 10px;
-    margin-right:5px;
-    font-weight:bold;
-    border-radius:15px;
-    ${props => 
-        props.badgeOn == true ? 
-        css`
-         display:"block";
-        `
-        : 
-        css`
-          display:"none";  
-        `
-    };
-`
+
+
