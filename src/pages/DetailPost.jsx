@@ -9,7 +9,6 @@ import { GoBackButton } from "common/ui/index";
 
 const DetailPost = () => {
     const params = useParams();
-    
     const id = Number(params.id);
     console.log(id);
     // const location = useLocation();
@@ -30,11 +29,11 @@ const DetailPost = () => {
         <Layout>
             <Container>
                 <HeadWrapper>
-                    <StyledGoBackButton onClick={() =>navigate.goBack()}/>
+                    <StyledGoBackButton />
                 </HeadWrapper>
-                <RecruitmentTitle title={data.title} nickname={data.nickname} />
+                <RecruitmentTitle title={data.title} nickname={data.nickname} userId={data.userID} boardContents={data}/>
                 <StyledHr />
-                <ApplySection date={data.date} memberNum={data.memberNum} totalMember={data.totalMember} />
+                <ApplySection date={data.date} memberNum={data.memberNum} totalMember={data.totalMember} applyUsers={data.applyUsers}/>
                 <StyledHr />
                 <RecruitmentInfo contents={data.contents} />
                 <StyledHr />
@@ -57,7 +56,7 @@ const Container = styled.div`
 
 const StyledHr = styled.hr`
     border: none;
-    border-top: 1px solid black;
+    border-top: 2px solid #e3e3e3;
     margin: 10px 0;
     width: 100%;
     /* height: 1px; */

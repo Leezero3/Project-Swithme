@@ -13,7 +13,7 @@ export default RecruitmentInfo;
 
 const Container = styled.div`
     width: 99%;
-    min-height: 100px;
+    min-height: 150px;
     /* border: 1px solid black; */
     font-size: 17px;
     padding: 20px;

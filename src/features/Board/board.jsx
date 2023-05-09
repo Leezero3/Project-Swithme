@@ -12,6 +12,8 @@ function Board() {
     const { isLoading, isError, data } = useQuery("todos", getStudyList);
     const navigate = useNavigate();
 
+    console.log(data);
+
     if (isLoading) {
         return <h1>로딩중입니다...</h1>;
     };
@@ -83,7 +85,7 @@ const Card = styled.div`
 const CardTitle = styled.p`
     font-weight:700;
     font-size:22px;
-    margin:20px 0;
+    margin:12px 0;
     width:100%;
     overflow:hidden;
     text-overflow:ellipsis;
