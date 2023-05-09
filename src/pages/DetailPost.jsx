@@ -6,18 +6,20 @@ import { RecruitmentTitle, ApplySection, RecruitmentInfo, Comments } from "featu
 import { getDetailPage } from "api/todo";
 import { useLocation, useParams, useNavigate } from 'react-router-dom';
 import { GoBackButton } from "common/ui/index";
+import { useDispatch, useSelector } from 'react-redux';
+import { setPost } from "redux/modules/editPost";
 
 const DetailPost = () => {
     const params = useParams();
     const id = Number(params.id);
     console.log(id);
-    // const location = useLocation();
-    // console.log(location);
-    // const id = location.state.id;
     const {isLoading, isError, data} = useQuery("todos", ()=>getDetailPage(id));
     console.log(data);
-
+    const dispatch = useDispatch();
     const navigate = useNavigate();
+
+    // 페이지 마운트 시 useQuery로 불러온 data값 store에 저장
+    dispatch(setPost(data));
     
     if (isLoading) {
         return <h1>로딩중입니다...</h1>;
@@ -31,7 +33,7 @@ const DetailPost = () => {
                 <HeadWrapper>
                     <StyledGoBackButton />
                 </HeadWrapper>
-                <RecruitmentTitle title={data.title} nickname={data.nickname} userId={data.userID} boardContents={data}/>
+                <RecruitmentTitle title={data.title} nickname={data.nickname} userId={data.userID} boardId={data.id}/>
                 <StyledHr />
                 <ApplySection date={data.date} memberNum={data.memberNum} totalMember={data.totalMember} applyUsers={data.applyUsers}/>
                 <StyledHr />

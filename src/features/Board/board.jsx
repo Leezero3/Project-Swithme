@@ -1,6 +1,6 @@
 import { getStudyList } from 'api/todo';
 import React, { useEffect } from 'react'
-import { useQuery } from 'react-query';
+import { useMutation, useQuery, useQueryClient } from 'react-query';
 import { CiCircleChevRight } from "react-icons/ci";
 import styled, { css } from 'styled-components';
 import study from '../../assets/board-study-book.png';
@@ -9,9 +9,9 @@ import Badge from './badge';
 import { useNavigate } from 'react-router-dom';
 
 function Board() {
-    const { isLoading, isError, data } = useQuery("todos", getStudyList);
+    const { isLoading, isError, data } = useQuery("getStudy", getStudyList);
     const navigate = useNavigate();
-
+    
     console.log(data);
 
     if (isLoading) {
@@ -33,7 +33,7 @@ function Board() {
                 <CiCircleChevRight className='GoDetail'/>
                 <CardTitle>{item.title}</CardTitle>
                 <CardDate>마감 : {item.date}</CardDate>
-                <CardMember>인원 : <b>{item.memberNum}</b> / {item.totalMember}</CardMember>
+                <CardMember>인원 : <b>{item.totalMember}</b> / {item.memberNum}</CardMember>
                 {/* <CardContents>{item.contents}</CardContents> */}
                 <BadgeArea>
                     <Badge type="groupType" groupType={item.type}>{item.type}</Badge>
