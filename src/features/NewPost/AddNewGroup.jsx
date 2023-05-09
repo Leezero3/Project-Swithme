@@ -8,9 +8,19 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { ko } from 'date-fns/esm/locale';
 import { addNewGroupPosting } from 'api/todo';
+import { useNavigate } from 'react-router-dom';
 
-function AddNewGroup() {
+function AddNewGroup({editState}) {
     const queryClient = useQueryClient();
+
+    const [newGroup, setNewGroup] = useState({
+      type:"",
+      title:"",
+      date:"",
+      totalMember:"",
+      contents:""
+    });
+
     // DatePicker: date 저장
     const [startDate, setStartDate] = useState(new Date());
 
@@ -26,19 +36,12 @@ function AddNewGroup() {
         setMemberCounter(memberCounter-1);
         }
     };
-
+    const navigate = useNavigate();
     const mutation = useMutation(addNewGroupPosting,{
        onSuccess: () => {
-        console.log('성공')
+        alert('모임을 만들었습니다!');
+        navigate('/');
        } 
-    });
-
-    const [newGroup, setNewGroup] = useState({
-        type:"",
-        title:"",
-        date:"",
-        totalMember:"",
-        contents:""
     });
 
     const addInputHandler = (e) =>{

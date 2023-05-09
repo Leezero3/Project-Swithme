@@ -8,7 +8,9 @@ const getStudyList = async () => {
 
 // NewPost : 새로운 그룹 모집글 작성
 const addNewGroupPosting = async (newPost) => {
-    await axios.post(`${process.env.REACT_APP_SERVER_URL}/boards`,newPost);
+    await axios.post(`${process.env.REACT_APP_SERVER_URL}/boards`,newPost,{
+        // header: {authorization: `Bearer ${authorization}`}
+    });
 };
 
 // DetailPost : 상세페이지 정보 조회
@@ -17,5 +19,30 @@ const getDetailPage = async (id) => {
     return response.data;
 };
 
-export { getStudyList, addNewGroupPosting, getDetailPage };
+// DetailPost : 모임 신청하기
+const applyGroupRequest = async (authorization) => {
+    try{
+        const response = await axios.post(`${process.env.REACT_APP_SERVER_URL}/applicants`,{
+            header: {authorization: `Bearer ${authorization}`}
+        });
+        return response;
+    } catch(error){
+        return Promise.reject(error.reponse);
+    }
+};
+
+// DetailPost : 모임 신청 취소하기
+const cancelApplyGroupRequest = async (authorization) => {
+    try{
+        const response = await axios.delete(`${process.env.REACT_APP_SERVER_URL}/applicants`,{
+            header: {authorization: `Bearer ${authorization}`}
+        });
+        return response;
+    } catch(error){
+        return Promise.reject(error.reponse);
+    }
+
+}
+
+export { getStudyList, addNewGroupPosting, getDetailPage, applyGroupRequest };
 

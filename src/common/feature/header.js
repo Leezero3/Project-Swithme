@@ -11,7 +11,7 @@ function Header() {
         <Container>
             <Wrapper>
                 <StyledLink to="/" title="메인페이지로 이동" className="logo">
-                    <span>S</span>withMe
+                📚 <span style={{color:"#1369cf"}}>S</span>withMe 
                 </StyledLink>
                 <StyledNav>
                     <CommonButton
