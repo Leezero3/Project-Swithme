@@ -15,9 +15,10 @@ import { addNewGroupPosting, editGroupPosting } from 'api/todo';
 function AddNewGroup({toEditPost}) {
     const queryClient = useQueryClient();
     const Post = useSelector((state) => state.editPostStore.post);
+    const jwt = localStorage.getItem("access_token");
 
     const [newGroup, setNewGroup] = useState({
-      type:"",
+      type:"project",
       title:"",
       date:"",
       totalMember:"",
@@ -93,7 +94,7 @@ function AddNewGroup({toEditPost}) {
           startDate: startDate.toISOString(), // ISO8601 문자열 형태로 저장
           memberCounter: memberCounter,
         };
-        putMutation.mutate(editPost);
+        putMutation.mutate({editPost, jwt});
       } else {
         const newPost = {
           type: newGroup.type,
@@ -105,7 +106,7 @@ function AddNewGroup({toEditPost}) {
           startDate: startDate.toISOString(), // ISO8601 문자열 형태로 저장
           memberCounter: memberCounter,
         };
-        mutation.mutate(newPost);
+        mutation.mutate({newPost, jwt});
       }
     };
     
@@ -114,7 +115,7 @@ function AddNewGroup({toEditPost}) {
     <>
         <Form onSubmit={onSubmitHandler}>
             <RadioWrapper>
-                <InputRadio type="radio" name='type' id="project" value="project" onChange={addInputHandler} />
+                <InputRadio type="radio" name='type' id="project" defaultChecked value="project" onChange={addInputHandler} />
                 <label htmlFor='project' value="project">
                     <img src={project} alt="프로젝트"></img>
                     <span>프로젝트</span>

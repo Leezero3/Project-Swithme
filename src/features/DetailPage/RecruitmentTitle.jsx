@@ -5,6 +5,7 @@ import { useMutation, useQuery, useQueryClient } from 'react-query'
 import { deleteGroupPosting } from "api/todo";
 
 function RecruitmentTitle({title, nickname, userId, boardId, createAt}) {
+    const jwt = localStorage.getItem("access_token");
     // 현재 접속한 myId와 작성자의 userId가 일치하면 수정|삭제 가능하도록
     const AmIWriter = (userId) =>{
         const myId = localStorage.userID;
@@ -29,7 +30,7 @@ function RecruitmentTitle({title, nickname, userId, boardId, createAt}) {
     });
 
     const removeHandler = () => {
-        mutation.mutate(boardId);
+        mutation.mutate({boardId, jwt});
     };
     
     return (

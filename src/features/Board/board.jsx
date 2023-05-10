@@ -7,6 +7,7 @@ import study from '../../assets/board-study-book.png';
 import project from '../../assets/board-project-highfive.png';
 import Badge from './badge';
 import { useNavigate } from 'react-router-dom';
+import Loading from 'pages/Loading';
 
 function Board() {
     const { isLoading, isError, data } = useQuery("getStudy", getStudyList);
@@ -15,7 +16,7 @@ function Board() {
     console.log(data);
 
     if (isLoading) {
-        return <h1>로딩중입니다...</h1>;
+        return <Loading />;
     };
     if (isError) {
         return <h1>오류가 발생하였습니다...</h1>;
