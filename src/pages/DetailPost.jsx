@@ -1,10 +1,10 @@
 import React from "react";
-import { useQuery } from 'react-query';
+import { useQuery } from "react-query";
 import { Layout } from "common/feature";
 import styled from "styled-components";
 import { RecruitmentTitle, ApplySection, RecruitmentInfo, Comments } from "features/DetailPage";
 import { getDetailPage } from "api/todo";
-import { useLocation, useParams, useNavigate } from 'react-router-dom';
+import { useParams } from "react-router-dom";
 import { GoBackButton } from "common/ui/index";
 import { useDispatch, useSelector } from 'react-redux';
 import { setPost } from "redux/modules/editPost";
@@ -27,23 +27,29 @@ const DetailPost = () => {
     if (isError) {
         return <h1>오류가 발생하였습니다...</h1>;
     }
+
     return (
         <Layout>
             <Container>
                 <HeadWrapper>
                     <StyledGoBackButton />
-                </HeadWrapper>
+
                 <RecruitmentTitle title={data.title} nickname={data.nickname} userId={data.userID} boardId={data.id}/>
                 <StyledHr />
-                <ApplySection date={data.date} memberNum={data.memberNum} totalMember={data.totalMember} applyUsers={data.applyUsers}/>
+                {/* <ApplySection
+                    date={data.date}
+                    memberNum={data.memberNum}
+                    totalMember={data.totalMember}
+                    applyUsers={data.applyUsers}
+                /> */}
                 <StyledHr />
-                <RecruitmentInfo contents={data.contents} />
+                {/* <RecruitmentInfo contents={data.contents} /> */}
                 <StyledHr />
                 <Comments />
             </Container>
         </Layout>
     );
-}
+};
 
 const Container = styled.div`
     width: 100%;
