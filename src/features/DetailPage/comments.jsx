@@ -11,20 +11,20 @@ import { addComments, getComments } from "api/comments";
 function Comments() {
     const params = useParams();
     const boardId = Number(params.id);
+    const token = localStorage.getItem("access_token");
 
     // comments 추가
-    // const queryClient = useQueryClient();
+    const queryClient = useQueryClient();
     const mutation = useMutation(addComments, {
-        onSuccess: () => {
+        onSuccess: (response) => {
             // queryClient.invalidateQueries("쿼리키 참조 필요"); // 쿼리키 - detailPost
-            console.log("성공하였습니다.");
+            console.log(response.data);
         },
     });
 
-    // const { isLoading, isError, data } = useQuery("comments", getComments);
-    const { isLoading, isError, data } = useQuery(["comments", boardId], () => getComments(boardId));
+    const { isLoading, isError, data } = useQuery("comments", () => getComments(boardId));
 
-    // console.log(data);
+    console.log(data);
 
     const [commentData, setCommentData] = useState({
         comment: "",

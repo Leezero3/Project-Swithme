@@ -33,10 +33,8 @@ function Login() {
 
     const mutation = useMutation(userLogin, {
         onSuccess: (response) => {
-            // console.log(`token 확인!`, response);
             dispatch(token(response.token));
             localStorage.setItem("access_token", response.token);
-            console.log(`aaaaaaaaa`, localStorage.getItem("access_token"));
             console.log("성공");
             navigate("/");
         },
