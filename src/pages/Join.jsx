@@ -18,12 +18,13 @@ function Join() {
     // const { username, nickname, password } = signup;
 
     const inputHandleChange = (event) => {
-        console.log(event.target.value);
+        // console.log(event.target.value);
         setSignup({ ...signup, [event.target.name]: event.target.value });
         // console.log(signup);
     };
 
-    const submitJoinHandler = () => {
+    const submitJoinHandler = (event) => {
+        // const userSignupData = { // state로 관리되면 const로 선언 가능하다. <-- 서버랑 연결되면 체크해보기 for 불변성
         let userSignupData = {
             username: signup.username,
             nickname: signup.nickname,
@@ -31,17 +32,21 @@ function Join() {
             verifyPassword: signup.verifyPassword,
         };
 
+        // console.log(userSignupData);
+
         if (signup.password !== signup.verifyPassword) {
+            event.preventDefault();
             alert("비밀번호가 다릅니다.");
         } else {
+            event.preventDefault();
             mutation.mutate(userSignupData);
         }
     };
 
     const mutation = useMutation(addUsers, {
         onSuccess: () => {
-            // alert("회원가입이 완료되었습니다.");
-            navigate("/");
+            alert("회원가입이 완료되었습니다.");
+            // navigate("/");
         },
         onError: (error) => {
             alert(error);
@@ -74,18 +79,21 @@ function Join() {
                         label="패스워드"
                         type="password"
                         name="password"
+                        autoComplete="new-password"
                         value={signup.password}
                         onChange={inputHandleChange}
                     />
                     <JoinLoginInput
                         label="패스워드 확인"
                         type="password"
+                        autoComplete="new-password"
                         name="verifyPassword"
                         value={signup.verifyPassword}
+                        x
                         onChange={inputHandleChange}
                     />
 
-                    <CommonButton size="joinLoginButton" type="submit" onClick={() => submitJoinHandler()}>
+                    <CommonButton size="joinLoginButton" type="submit" onClick={submitJoinHandler}>
                         회원가입하기
                     </CommonButton>
                 </SignUpForm>

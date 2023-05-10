@@ -1,11 +1,11 @@
 import styled from "styled-components";
 
 function JoinLoginInput(props) {
-    const { label, type, value, name, onChange } = props;
+    const { label, type, value, name, onChange, autocomplete } = props;
     return (
         <InputWrapper>
             <InputLabel>{label}</InputLabel>
-            <InputField type={type} value={value} name={name} onChange={onChange} />
+            <InputField type={type} value={value} name={name} onChange={onChange} autocomplete={autocomplete} />
         </InputWrapper>
     );
 }

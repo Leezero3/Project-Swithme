@@ -1,23 +1,33 @@
 import axios from "axios";
 
-const addUsers = async (newUser) => {
+// 회원가입
+const addUsers = async (newUserData) => {
+    console.log(newUserData);
     try {
-        console.log(newUser);
-        const response = await axios.post(`${process.env.REACT_APP_SERVER_URL}/users/signup`, newUser);
-        // return response.data;
+        const response = await axios.post(`${process.env.REACT_APP_SERVER_URL}/users/signup`, newUserData, {
+            withCredentials: true,
+        });
+        return response.data;
     } catch (error) {
         // return Promise.reject(error.response.data.message);
-        return alert(`회원가입에 실패했습니다.`);
+        return Promise.reject(error);
+        // return alert(`회원가입에 실패했습니다.`);
+        // return error;
     }
 };
 
+// 로그인
 const userLogin = async (userLoginData) => {
     try {
-        const response = await axios.post(`${process.env.REACT_APP_SERVER_URL}/users/login`, userLoginData);
-        return response.data;
+        const response = await axios.post(`${process.env.REACT_APP_SERVER_URL}/users/login`, userLoginData, {
+            withCredentials: true,
+        });
+        const authToken = response.headers.authorization;
+
+        return { data: response.data, token: authToken };
     } catch (error) {
-        //   return Promise.reject(error.response.data.message);
-        return alert(`로그인에 실패했습니다.`);
+        return Promise.reject(error);
+        // return alert(`로그인에 실패했습니다.`);
     }
 };
 
