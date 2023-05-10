@@ -1,25 +1,30 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import { useMutation } from "react-query";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import { Layout } from "common/feature";
 import { CommonButton, GoBackButton, JoinLoginInput } from "common/ui";
 import { userLogin } from "api/user";
+import { token } from "redux/modules/user";
 
 function Login() {
+    const navigate = useNavigate();
+    const dispatch = useDispatch();
     const [loginFormData, setloginFormData] = useState({
         username: "",
         password: "",
     });
 
     const handleLoginFormChange = (event) => {
-        console.log(event.target.value);
+        // console.log(event.target.value);
         setloginFormData({ ...loginFormData, [event.target.name]: event.target.value });
-        console.log(loginFormData);
+        // console.log(loginFormData);
     };
 
     const loginButtonHandler = (event) => {
         if (loginFormData.username !== "" && loginFormData.password !== "") {
-            event.preventDefault();
+            event.preventDefault(); // 리랜더링 한번 더 확인 ✅
             mutation.mutate(loginFormData);
         } else {
             alert("ID와 PASSWORD를 모두 입력하셔야 합니다!");
@@ -27,12 +32,14 @@ function Login() {
     };
 
     const mutation = useMutation(userLogin, {
-        // onSuccess: (response) => {
-        //     dispatch(token(response.token));
-        //     localStorage.setItem("access_token", response.token);
-        //     console.log("성공");
-        //     navigate("/");
-        // },
+        onSuccess: (response) => {
+            // console.log(`token 확인!`, response);
+            dispatch(token(response.token));
+            localStorage.setItem("access_token", response.token);
+            console.log(`aaaaaaaaa`, localStorage.getItem("access_token"));
+            console.log("성공");
+            navigate("/");
+        },
 
         onError: (error) => {
             alert(error);
@@ -49,8 +56,8 @@ function Login() {
                 <LoginForm>
                     <JoinLoginInput label="아이디" type="text" name="username" onChange={handleLoginFormChange} />
                     <JoinLoginInput label="패스워드" type="password" name="password" onChange={handleLoginFormChange} />
-                    <CommonButton size="joinLoginButton" type="submit" onClick={() => loginButtonHandler()}>
-                        회원가입하기
+                    <CommonButton size="joinLoginButton" type="submit" onClick={loginButtonHandler}>
+                        로그인하기
                     </CommonButton>
                 </LoginForm>
             </Container>

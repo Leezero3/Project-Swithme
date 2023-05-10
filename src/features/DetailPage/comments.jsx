@@ -1,13 +1,68 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import { CommonButton } from "common/ui";
+import { useParams } from "react-router-dom";
+import { useMutation, useQueryClient, useQuery } from "react-query";
+import { addComments, getComments } from "api/comments";
+
+// 구현 list 토큰으로 받아온 값 authorization 넣어서 api 로 전달
+// 삭제, 수정,
 
 function Comments() {
+    const params = useParams();
+    const boardId = Number(params.id);
+
+    // comments 추가
+    // const queryClient = useQueryClient();
+    const mutation = useMutation(addComments, {
+        onSuccess: () => {
+            // queryClient.invalidateQueries("쿼리키 참조 필요"); // 쿼리키 - detailPost
+            console.log("성공하였습니다.");
+        },
+    });
+
+    // const { isLoading, isError, data } = useQuery("comments", getComments);
+    const { isLoading, isError, data } = useQuery(["comments", boardId], () => getComments(boardId));
+
+    // console.log(data);
+
+    const [commentData, setCommentData] = useState({
+        comment: "",
+        boardId: boardId,
+    });
+
+    const handleCommentFormChange = (event) => {
+        const { name, value } = event.target;
+        setCommentData((prevCommentData) => ({
+            ...prevCommentData,
+            [name]: value,
+        }));
+    };
+
+    const commentButtonHandler = (event) => {
+        if (commentData.comment !== "") {
+            event.preventDefault(); // 리랜더링 한번 더 확인 ✅
+            alert(commentData.comment);
+            mutation.mutate(commentData);
+            setCommentData({ boardId: boardId, comment: "" });
+        } else {
+            alert("댓글을 작성해주세요!");
+        }
+    };
+
     return (
         <Container>
             <CommentForm>
-                <StyledInput placeholder="코멘트를 남겨주세요." />
-                <CommonButton size="postDetailCommentButton">댓글달기</CommonButton>
+                <StyledInput
+                    placeholder="코멘트를 남겨주세요."
+                    type="text"
+                    name="comment"
+                    value={commentData.comment}
+                    onChange={handleCommentFormChange}
+                />
+                <CommonButton size="postDetailCommentButton" type="submit" onClick={commentButtonHandler}>
+                    댓글달기
+                </CommonButton>
             </CommentForm>
             <CommentList>
                 <div>리액트 스터디 참여하고 싶습니다. 추가 모집 안하나요?</div>
@@ -33,7 +88,7 @@ const Container = styled.div`
     align-items: center;
 `;
 
-const CommentForm = styled.div`
+const CommentForm = styled.form`
     width: 100%;
     height: 30px;
     display: flex;

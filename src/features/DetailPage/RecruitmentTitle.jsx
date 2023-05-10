@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+
 import { useNavigate } from 'react-router-dom';
 import { useMutation, useQuery, useQueryClient } from 'react-query'
 import { deleteGroupPosting } from "api/todo";
@@ -7,14 +8,15 @@ import { deleteGroupPosting } from "api/todo";
 function RecruitmentTitle({title, nickname, userId, boardId, createAt}) {
     const jwt = localStorage.getItem("access_token");
     // 현재 접속한 myId와 작성자의 userId가 일치하면 수정|삭제 가능하도록
-    const AmIWriter = (userId) =>{
+    const AmIWriter = (userId) => {
         const myId = localStorage.userID;
-        if(myId === userId){
+        if (myId === userId) {
             return true;
         } else {
             return false;
         }
     };
+
     const navigate = useNavigate();
     const queryClient = useQueryClient();
 
@@ -43,6 +45,7 @@ function RecruitmentTitle({title, nickname, userId, boardId, createAt}) {
                     <p> | {createAt}</p>
                 </AuthorWrapper>
                 <ButtonWrapper show={AmIWriter(userId)}>
+
                     <EditDeleteButton onClick={() => navigate('/new-post',{state: boardId})}>수정</EditDeleteButton>
                     <ButtonSeperator />
                     <EditDeleteButton onClick={() => removeHandler()}>삭제</EditDeleteButton>
@@ -79,18 +82,18 @@ const AuthorWrapper = styled.div`
     min-width: 200px;
     display: flex;
     align-items: center;
-    p{
-        margin-right:15px;
+    p {
+        margin-right: 15px;
     }
     p:last-child {
-        color:#ccc;
+        color: #ccc;
     }
 `;
 
 const ButtonWrapper = styled.div`
     width: 110px;
     justify-content: space-between;
-    display:${(props) => props.show? "flex": "none"};
+    display: ${(props) => (props.show ? "flex" : "none")};
     align-items: center;
 `;
 
