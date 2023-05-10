@@ -1,17 +1,20 @@
-import CommonButton from 'common/ui/common-button';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useMutation, useQuery, useQueryClient } from 'react-query';
-import styled from 'styled-components';
+import { useNavigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import styled, { css } from 'styled-components';
+import CommonButton from 'common/ui/common-button';
 import study from '../../assets/board-study-book.png';
 import project from '../../assets/board-project-highfive.png';
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { ko } from 'date-fns/esm/locale';
-import { addNewGroupPosting } from 'api/todo';
-import { useNavigate } from 'react-router-dom';
+import { addNewGroupPosting, editGroupPosting } from 'api/todo';
 
-function AddNewGroup({editState}) {
+
+function AddNewGroup({toEditPost}) {
     const queryClient = useQueryClient();
+    const Post = useSelector((state) => state.editPostStore.post);
 
     const [newGroup, setNewGroup] = useState({
       type:"",
@@ -21,11 +24,32 @@ function AddNewGroup({editState}) {
       contents:""
     });
 
+    const isThisEditPage = () => {
+      if(toEditPost !== null) {
+        setEditMode('수정하기');
+      } else{
+        setEditMode('등록하기');
+      }
+    };
+
+    useEffect(() => {
+      if (toEditPost !== null) {
+        setNewGroup(Post);
+        setMemberCounter(Post.totalMember);
+        setStartDate(new Date(Post.date)); // Post.date 값을 Date 객체로 변환하여 startDate에 설정
+      }
+      isThisEditPage();
+    }, [toEditPost, Post]);
+
+    // 글 작성하기 OR 수정하기 모드 저장
+    const [EditMode, setEditMode] = useState('등록하기'); 
+
     // DatePicker: date 저장
     const [startDate, setStartDate] = useState(new Date());
 
     // Member : MemberNum counter
     const [memberCounter, setMemberCounter] = useState(0);
+
     // 증가
     const onIncrease = () => {
         setMemberCounter(memberCounter+1);
@@ -43,24 +67,48 @@ function AddNewGroup({editState}) {
         navigate('/');
        } 
     });
+    const putMutation = useMutation(editGroupPosting,{
+      onSuccess: () => {
+       alert('모임정보가 수정되었습니다!');
+       navigate('/');
+      } 
+   });
 
     const addInputHandler = (e) =>{
         setNewGroup({...newGroup,[e.target.name]:e.target.value});
     };
 
-    const onSubmitHandler = (e) =>{
-        e.preventDefault();
-        const newPost = {
-            type:newGroup.type,
-            title:newGroup.title,
-            date:startDate.toLocaleDateString(),
-            totalMember:memberCounter,
-            contnets:newGroup.contents
+    const onSubmitHandler = (e) => {
+      e.preventDefault();
+      // 수정페이지일 땐 수정요청보내기
+      if (toEditPost !== null){
+        const editPost = {
+          id:Post.id,
+          type: newGroup.type,
+          title: newGroup.title,
+          date: startDate.toLocaleDateString(),
+          totalMember: memberCounter,
+          contents: newGroup.contents,
+          // startDate와 memberCounter 추가
+          startDate: startDate.toISOString(), // ISO8601 문자열 형태로 저장
+          memberCounter: memberCounter,
         };
-        console.log(newPost);
+        putMutation.mutate(editPost);
+      } else {
+        const newPost = {
+          type: newGroup.type,
+          title: newGroup.title,
+          date: startDate.toLocaleDateString(),
+          totalMember: memberCounter,
+          contents: newGroup.contents,
+          // startDate와 memberCounter 추가
+          startDate: startDate.toISOString(), // ISO8601 문자열 형태로 저장
+          memberCounter: memberCounter,
+        };
         mutation.mutate(newPost);
-
+      }
     };
+    
 
   return (
     <>
@@ -105,9 +153,9 @@ function AddNewGroup({editState}) {
 
             <InputWrapper size="textarea">
                 <InputLabel>모집내용</InputLabel>
-                <TextArea defaultvalue={newGroup.contents} name="contents" onChange={addInputHandler}></TextArea>
+                <TextArea value={newGroup.contents} name="contents" onChange={addInputHandler}></TextArea>
             </InputWrapper>
-            <CommonButton size='large' style={{margin:"0 auto"}}>모집 글 등록하기</CommonButton>
+            <CommonButton size='large' style={{margin:"0 auto"}}>{EditMode}</CommonButton>
         </Form>
     </>
   )

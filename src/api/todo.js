@@ -13,6 +13,16 @@ const addNewGroupPosting = async (newPost) => {
     });
 };
 
+// NewPost : 그룹 모집글 수정하기
+const editGroupPosting = async (editPost) => {
+    await axios.put(`${process.env.REACT_APP_SERVER_URL}/boards/${editPost.id}`, editPost);
+}; 
+
+// NewPost : 그룹 모집글 삭제하기
+const deleteGroupPosting = async (deletePost) => {
+    await axios.delete(`${process.env.REACT_APP_SERVER_URL}/boards/${deletePost}`);
+};
+
 // DetailPost : 상세페이지 정보 조회
 const getDetailPage = async (id) => {
     const response = await axios.get(`${process.env.REACT_APP_SERVER_URL}/boards/${id}`);
@@ -44,5 +54,5 @@ const cancelApplyGroupRequest = async (authorization) => {
 
 }
 
-export { getStudyList, addNewGroupPosting, getDetailPage, applyGroupRequest };
+export { getStudyList, addNewGroupPosting, editGroupPosting, deleteGroupPosting, getDetailPage, applyGroupRequest };
 

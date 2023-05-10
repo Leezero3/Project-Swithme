@@ -6,37 +6,35 @@ import { RecruitmentTitle, ApplySection, RecruitmentInfo, Comments } from "featu
 import { getDetailPage } from "api/todo";
 import { useParams } from "react-router-dom";
 import { GoBackButton } from "common/ui/index";
+import { useDispatch, useSelector } from 'react-redux';
+import { setPost } from "redux/modules/editPost";
 
 const DetailPost = () => {
     const params = useParams();
     const id = Number(params.id);
-    // console.log(id);
-    // const location = useLocation();
-    // console.log(location);
-    // const id = location.state.id;
-    // const { isLoading, isError, data } = useQuery("todos", () => getDetailPage(id));
-    // console.log(data);
+    console.log(id);
+    const {isLoading, isError, data} = useQuery("todos", ()=>getDetailPage(id));
+    console.log(data);
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
 
-    // const navigate = useNavigate();
+    // 페이지 마운트 시 useQuery로 불러온 data값 store에 저장
+    dispatch(setPost(data));
+    
+    if (isLoading) {
+        return <h1>로딩중입니다...</h1>;
+    }
+    if (isError) {
+        return <h1>오류가 발생하였습니다...</h1>;
+    }
 
-    // if (isLoading) {
-    //     return <h1>로딩중입니다...</h1>;
-    // }
-    // if (isError) {
-    //     return <h1>오류가 발생하였습니다...</h1>;
-    // }
     return (
         <Layout>
             <Container>
                 <HeadWrapper>
                     <StyledGoBackButton />
-                </HeadWrapper>
-                {/* <RecruitmentTitle
-                    title={data.title}
-                    nickname={data.nickname}
-                    userId={data.userID}
-                    boardContents={data}
-                /> */}
+
+                <RecruitmentTitle title={data.title} nickname={data.nickname} userId={data.userID} boardId={data.id}/>
                 <StyledHr />
                 {/* <ApplySection
                     date={data.date}
