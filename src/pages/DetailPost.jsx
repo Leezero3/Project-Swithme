@@ -1,12 +1,12 @@
 import React from "react";
-import { useQuery } from 'react-query';
+import { useQuery } from "react-query";
 import { Layout } from "common/feature";
 import styled from "styled-components";
 import { RecruitmentTitle, ApplySection, RecruitmentInfo, Comments } from "features/DetailPage";
 import { getDetailPage } from "api/todo";
-import { useLocation, useParams, useNavigate } from 'react-router-dom';
+import { useLocation, useParams, useNavigate } from "react-router-dom";
 import { GoBackButton } from "common/ui/index";
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch, useSelector } from "react-redux";
 import { setPost } from "redux/modules/editPost";
 import Loading from "./Loading";
 
@@ -21,7 +21,7 @@ const DetailPost = () => {
 
     // 페이지 마운트 시 useQuery로 불러온 data값 store에 저장
     dispatch(setPost(data));
-    
+
     if (isLoading) {
         return <Loading />
     }
@@ -44,7 +44,7 @@ const DetailPost = () => {
             </Container>
         </Layout>
     );
-}
+};
 
 const Container = styled.div`
     width: 100%;
