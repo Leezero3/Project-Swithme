@@ -1,5 +1,5 @@
 import React from "react";
-import styled from "styled-components";
+import styled, { createGlobalStyle } from "styled-components";
 
 import { useNavigate } from 'react-router-dom';
 import { useMutation, useQuery, useQueryClient } from 'react-query'
@@ -16,6 +16,8 @@ function RecruitmentTitle({title, nickname, userId, boardId, createAt}) {
             return false;
         }
     };
+
+    console.log('boardId',boardId)
 
     const navigate = useNavigate();
     const queryClient = useQueryClient();

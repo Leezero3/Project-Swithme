@@ -9,21 +9,21 @@ const getStudyList = async () => {
 // NewPost : 새로운 그룹 모집글 작성
 const addNewGroupPosting = async ({newPost, authorization}) => {
     await axios.post(`${process.env.REACT_APP_SERVER_URL}/boards`,newPost,{
-        header: {authorization: `Bearer ${authorization}`}
+        headers: {authorization: `Bearer ${authorization}`}
     });
 };
 
 // NewPost : 그룹 모집글 수정하기
 const editGroupPosting = async ({editPost, authorization}) => {
     await axios.put(`${process.env.REACT_APP_SERVER_URL}/boards/${editPost.id}`, editPost,{
-        header: {authorization: `Bearer ${authorization}`}
+        headers: {authorization: `Bearer ${authorization}`}
     });
 }; 
 
 // NewPost : 그룹 모집글 삭제하기
 const deleteGroupPosting = async ({deletePost, authorization}) => {
     await axios.delete(`${process.env.REACT_APP_SERVER_URL}/boards/${deletePost}`,{
-        header: {authorization: `Bearer ${authorization}`}
+        headers: {authorization: `Bearer ${authorization}`}
     });
 };
 
@@ -37,7 +37,7 @@ const getDetailPage = async (id) => {
 const applyGroupRequest = async (authorization) => {
     try{
         const response = await axios.post(`${process.env.REACT_APP_SERVER_URL}/applicants`,{
-            header: {authorization: `Bearer ${authorization}`}
+            headers: { authorization: `Bearer ${authorization}`}
         });
         return response;
     } catch(error){
@@ -49,7 +49,7 @@ const applyGroupRequest = async (authorization) => {
 const cancelApplyGroupRequest = async (authorization) => {
     try{
         const response = await axios.delete(`${process.env.REACT_APP_SERVER_URL}/applicants`,{
-            header: {authorization: `Bearer ${authorization}`}
+            headers: { authorization: `Bearer ${authorization}`}
         });
         return response;
     } catch(error){
