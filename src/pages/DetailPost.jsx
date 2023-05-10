@@ -12,9 +12,9 @@ import { setPost } from "redux/modules/editPost";
 const DetailPost = () => {
     const params = useParams();
     const id = Number(params.id);
-    console.log(id);
+    // console.log("id",id);
     const {isLoading, isError, data} = useQuery("todos", ()=>getDetailPage(id));
-    console.log(data);
+    // console.log(data);
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
@@ -33,7 +33,7 @@ const DetailPost = () => {
                 <HeadWrapper>
                     <StyledGoBackButton />
                 </HeadWrapper>
-                <RecruitmentTitle title={data.title} nickname={data.nickname} userId={data.userID} boardId={data.id}/>
+                <RecruitmentTitle title={data.title} nickname={data.nickname} userId={data.userID} boardId={id}/>
                 <StyledHr />
                 <ApplySection date={data.date} memberNum={data.memberNum} totalMember={data.totalMember} applyUsers={data.applyUsers}/>
                 <StyledHr />

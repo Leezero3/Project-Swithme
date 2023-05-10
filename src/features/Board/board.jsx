@@ -23,13 +23,13 @@ function Board() {
     };
     const goDetailPage = (item) =>{
         // console.log(state)
-        navigate(`/detail/${item.id}`);
+        navigate(`/detail/${item.boardId}`);
     };
 
   return (
     <CardContainer>
         {data.map((item) => 
-            <Card key={item.id} onClick={() => goDetailPage(item)}>
+            <Card key={item.boardId} onClick={() => goDetailPage(item)}>
                 <CardTypeImg src={item.type === "project"? project : study} alt="게시물 타입"/>
                 <CiCircleChevRight className='GoDetail'/>
                 <CardTitle>{item.title}</CardTitle>

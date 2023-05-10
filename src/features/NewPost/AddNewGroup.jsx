@@ -16,6 +16,7 @@ function AddNewGroup({toEditPost}) {
     const queryClient = useQueryClient();
     const Post = useSelector((state) => state.editPostStore.post);
     const jwt = localStorage.getItem("access_token");
+    // console.log('jwt',jwt)
 
     const [newGroup, setNewGroup] = useState({
       type:"project",
