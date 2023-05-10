@@ -8,22 +8,23 @@ const getStudyList = async () => {
 
 // NewPost : 새로운 그룹 모집글 작성
 const addNewGroupPosting = async ({newPost, authorization}) => {
+ 
     await axios.post(`${process.env.REACT_APP_SERVER_URL}/boards`,newPost,{
-        headers: {authorization: `Bearer ${authorization}`}
+        headers: {authorization: `${authorization}`}
     });
 };
 
 // NewPost : 그룹 모집글 수정하기
 const editGroupPosting = async ({editPost, authorization}) => {
     await axios.put(`${process.env.REACT_APP_SERVER_URL}/boards/${editPost.id}`, editPost,{
-        headers: {authorization: `Bearer ${authorization}`}
+        headers: {authorization: `${authorization}`}
     });
 }; 
 
 // NewPost : 그룹 모집글 삭제하기
-const deleteGroupPosting = async ({deletePost, authorization}) => {
-    await axios.delete(`${process.env.REACT_APP_SERVER_URL}/boards/${deletePost}`,{
-        headers: {authorization: `Bearer ${authorization}`}
+const deleteGroupPosting = async ({boardId, authorization}) => {
+    await axios.delete(`${process.env.REACT_APP_SERVER_URL}/boards/${boardId}`,{
+        headers: {authorization: ` ${authorization}`}
     });
 };
 
@@ -34,11 +35,13 @@ const getDetailPage = async (id) => {
 };
 
 // DetailPost : 모임 신청하기
-const applyGroupRequest = async (authorization) => {
+const applyGroupRequest = async ({boardId, authorization}) => {
+    console.log("APIboardId",boardId)
     try{
-        const response = await axios.post(`${process.env.REACT_APP_SERVER_URL}/applicants`,{
-            headers: { authorization: `Bearer ${authorization}`}
-        });
+        const response = await axios.post(`${process.env.REACT_APP_SERVER_URL}/applicants`, 
+            { boardId },
+            { headers: { authorization: `${authorization}`}}
+        );
         return response;
     } catch(error){
         return Promise.reject(error.reponse);
@@ -49,7 +52,7 @@ const applyGroupRequest = async (authorization) => {
 const cancelApplyGroupRequest = async (authorization) => {
     try{
         const response = await axios.delete(`${process.env.REACT_APP_SERVER_URL}/applicants`,{
-            headers: { authorization: `Bearer ${authorization}`}
+            headers: { authorization: `${authorization}`}
         });
         return response;
     } catch(error){

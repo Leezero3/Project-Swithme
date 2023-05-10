@@ -1,15 +1,20 @@
 import React from "react";
 import styled, { createGlobalStyle } from "styled-components";
-
 import { useNavigate } from 'react-router-dom';
 import { useMutation, useQuery, useQueryClient } from 'react-query'
 import { deleteGroupPosting } from "api/todo";
 
-function RecruitmentTitle({title, nickname, userId, boardId, createAt}) {
-    const jwt = localStorage.getItem("access_token");
+function RecruitmentTitle({title, nickname, userId, boardId, createdAt}) {
+    const date = new Date(createdAt);
+    const formattedDate = date.toLocaleString({timeZone: 'Asia/Seoul', hour12: true});
+    console.log(formattedDate); // 2023-05-10 12:49:20
+
+    const authorization = localStorage.getItem("access_token");
     // 현재 접속한 myId와 작성자의 userId가 일치하면 수정|삭제 가능하도록
     const AmIWriter = (userId) => {
-        const myId = localStorage.userID;
+        // const myId = localStorage.access_token;
+        const myId = userId;
+        console.log('myId',myId)
         if (myId === userId) {
             return true;
         } else {
@@ -17,14 +22,11 @@ function RecruitmentTitle({title, nickname, userId, boardId, createAt}) {
         }
     };
 
-    console.log('boardId',boardId)
-
     const navigate = useNavigate();
     const queryClient = useQueryClient();
 
     const mutation = useMutation(deleteGroupPosting,{
         onSuccess: () => {
-          queryClient.invalidateQueries('todos');
           alert('모집 글이 삭제되었습니다!');
           navigate('/');
         },
@@ -34,7 +36,7 @@ function RecruitmentTitle({title, nickname, userId, boardId, createAt}) {
     });
 
     const removeHandler = () => {
-        mutation.mutate({boardId, jwt});
+        mutation.mutate({boardId, authorization});
     };
     
     return (
@@ -44,7 +46,7 @@ function RecruitmentTitle({title, nickname, userId, boardId, createAt}) {
                 <AuthorWrapper>
                     <b>작성자</b>
                     <p>{nickname}</p>
-                    <p> | {createAt}</p>
+                    <p>{formattedDate}</p>
                 </AuthorWrapper>
                 <ButtonWrapper show={AmIWriter(userId)}>
 
@@ -61,9 +63,9 @@ export default RecruitmentTitle;
 
 const Container = styled.div`
     width: 100%;
-    min-height: 80px;
+    min-height: 100px;
     /* border: 1px solid black; */
-    padding: 10px;
+    padding: 50px 10px 10px;
 `;
 
 const Title = styled.div`
@@ -84,11 +86,15 @@ const AuthorWrapper = styled.div`
     min-width: 200px;
     display: flex;
     align-items: center;
+    b{
+        margin-right:10px;
+    }
     p {
-        margin-right: 15px;
+        margin-right: 10px;
+        color:#bbb;
     }
     p:last-child {
-        color: #ccc;
+        color: #bbb;
     }
 `;
 

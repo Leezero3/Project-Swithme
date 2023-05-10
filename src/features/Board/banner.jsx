@@ -30,17 +30,57 @@ const BannerContainer = styled.section`
         justify-content: space-between;
         align-items: center;
     }
-    & .banner-text-contents {
-    }
     & h1 {
         font-size: 35px;
         margin: 0;
-    }
+    };
     & p {
         font-size: 25px;
         margin: 0;
-    }
+    };
     & img {
         width: 350px;
+    };
+
+    @media screen and (max-width: 1199px) {
+        & .center-wrapper {
+        width: 90%;
+        
+        }
+        & .banner-text-contents {
+        }
+        & h1 {
+            font-size: 22px;
+            margin: 0;
+        }
+        & p {
+            font-size: 18px;
+            margin: 0;
+        }
+        & img {
+            width: 250px;
+        }
+    };
+    @media screen and (max-width: 700px) {
+        height:400px;
+        & .center-wrapper {
+            width: 90%;
+            height:400px;
+            flex-direction: column;
+            justify-content: space-evenly;
+        }
+        & .banner-text-contents {
+        }
+        & h1 {
+            font-size: 22px;
+            margin: 0;
+        }
+        & p {
+            font-size: 18px;
+            margin: 0;
+        }
+        & img {
+            width: 80%;
+        }
     }
 `;

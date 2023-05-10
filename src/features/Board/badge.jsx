@@ -3,8 +3,8 @@ import styled from 'styled-components';
 
 function Badge({children, type, memberNum, totalMemberNum, closeDate, ...rest}) {
     //게시글 정원임박 뱃지
-    const popular = (current, total) => {
-        if(current - total === 1){
+    const popular = (memberNum, totalMemberNum) => {
+        if(totalMemberNum - memberNum <= 1){
             return true;
         } else {
             return false;

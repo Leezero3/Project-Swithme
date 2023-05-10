@@ -28,8 +28,10 @@ function Board() {
 
   return (
     <CardContainer>
-        {data.map((item) => 
-            <Card key={item.boardId} onClick={() => goDetailPage(item)}>
+        {data.map((item) => {
+            const isClosed = item.totalMember === item.memberNum || new Date(item.date) < new Date();
+            return (
+            <Card key={item.boardId} onClick={() => goDetailPage(item)} className={isClosed ? "closed" : ""}>
                 <CardTypeImg src={item.type === "project"? project : study} alt="게시물 타입"/>
                 <CiCircleChevRight className='GoDetail'/>
                 <CardTitle>{item.title}</CardTitle>
@@ -41,8 +43,9 @@ function Board() {
                     <Badge type="closeMember" memberNum={item.memberNum} totalMemberNum={item.totalMember}>정원임박🔥</Badge>
                     <Badge type="closeDate" closeDate={item.date}>마감임박⏱️</Badge>
                 </BadgeArea>
-            </Card>        
-        )}
+            </Card>
+            )        
+        })}
     </CardContainer>
   );
 };
@@ -61,7 +64,7 @@ const CardContainer = styled.section`
 const Card = styled.div`
     position:relative;
     width:30%;
-    min-width:300px;
+    min-width:345px;
     height:350px;
     border:1px solid #e7e7e7;
     padding: 40px 30px;
@@ -81,6 +84,30 @@ const Card = styled.div`
 
     &:hover{
         transform:scale(1.03);
+    }
+
+    &.closed{
+        background-color:#ccc;
+        color:#777;
+        &>img{
+            filter: grayscale(100%);
+        }
+        &>div p{
+            filter: grayscale(100%);
+            color:#777;
+            background-color:#aaaaaa;
+        }
+        &:after{
+            content:"closed";
+            position:absolute;
+            top:50%;
+            left:48%;
+            display:block;
+            font-size:80px;
+            font-weight:900;
+            color:#333;
+            transform:translate(-50%, -50%) rotate(-30deg);
+        }
     }
 `
 const CardTitle = styled.p`

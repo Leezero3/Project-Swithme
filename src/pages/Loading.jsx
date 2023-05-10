@@ -14,19 +14,16 @@ function Loading() {
 export default Loading;
 
 const LoadingAni = styled.div`
-    position:absolute;
-    top:50%;
-    left:50%;
-    transform:translate(-50%, -50%);
-    width:300px;
-    height:300px;
+    width:100%;
+    height:200px;
+    margin-top:100px;
     text-align:center;
     /* color:#f85151; */
-    font-size:1.5rem;
+    font-size:1rem;
     font-weight:500;
     & > .loading{
-        width:50px;
-        height:50px;
+        width:150px;
+        height:150px;
         animation: loading 3s linear infinite;
         @keyframes loading {
             100% {
