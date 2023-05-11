@@ -33,7 +33,9 @@ const DetailPost = () => {
                 <HeadWrapper>
                     <StyledGoBackButton />
                 </HeadWrapper>
+
                 <RecruitmentTitle title={data.title} nickname={data.nickname} userId={data.userId} boardId={id} createdAt={data.createdAt}/>
+
                 <StyledHr />
                 <ApplySection date={data.date} memberNum={data.memberNum} totalMember={data.totalMember} applyUsers={data.applyUsers} applyUserId={data.applyUserId} boardId={id}/>
                 <StyledHr />

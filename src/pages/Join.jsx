@@ -44,9 +44,13 @@ function Join() {
     };
 
     const mutation = useMutation(addUsers, {
-        onSuccess: () => {
-            alert("회원가입이 완료되었습니다.");
-            // navigate("/");
+        onSuccess: (response) => {
+            if (response.status === "BAD_REQUEST") {
+                alert(response.msg);
+            } else {
+                alert("회원가입이 완료되었습니다.");
+                navigate("/");
+            }
         },
         onError: (error) => {
             alert(error);
@@ -105,10 +109,12 @@ function Join() {
 export default Join;
 
 const Container = styled.div`
+    /* min-height: 500px; */
+    height: 60vh;
     margin-top: 4%;
     display: flex;
     flex-direction: column;
-    /* justify-content: center; */
+    justify-content: center;
     align-items: center;
 `;
 

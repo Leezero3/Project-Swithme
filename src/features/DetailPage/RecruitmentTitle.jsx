@@ -13,6 +13,7 @@ function RecruitmentTitle({title, nickname, userId, boardId, createdAt}) {
     // console.log("로그인 userid", typeof userid);
     // console.log("작성자 userId", typeof userId);
     const authorization = localStorage.getItem("access_token");
+
     // 현재 접속한 myId와 작성자의 userId가 일치하면 수정|삭제 가능하도록
     const AmIWriter = () => {
         if (userid === userId) {
@@ -25,32 +26,36 @@ function RecruitmentTitle({title, nickname, userId, boardId, createdAt}) {
     const navigate = useNavigate();
     const queryClient = useQueryClient();
 
-    const mutation = useMutation(deleteGroupPosting,{
+    const mutation = useMutation(deleteGroupPosting, {
         onSuccess: () => {
           alert('모집 글이 삭제되었습니다!');
           navigate('/');
         },
         onError: (error) => {
-          alert('글 삭제가 실패했습니다 ㅜㅠ');
-        }
+            alert("글 삭제가 실패했습니다 ㅜㅠ");
+        },
     });
 
     const removeHandler = () => {
+
         mutation.mutate({boardId, authorization});
+
     };
-    
+
     return (
         <Container>
             <Title>{title}</Title>
             <PostMetaSectionWrapper>
                 <AuthorWrapper>
                     <b>작성자</b>
+
                     <p>{nickname}</p>
                     <p>{formattedDate}</p>
                 </AuthorWrapper>
                 <ButtonWrapper show={AmIWriter()}>
                     <EditDeleteButton onClick={() => navigate('/new-post',{state: boardId})}>수정</EditDeleteButton>
                     <span> | </span>
+
                     <EditDeleteButton onClick={() => removeHandler()}>삭제</EditDeleteButton>
                 </ButtonWrapper>
             </PostMetaSectionWrapper>
@@ -82,18 +87,20 @@ const PostMetaSectionWrapper = styled.div`
 
 const AuthorWrapper = styled.div`
     font-size: 15px;
-    min-width: 200px;
+    min-width: 700px;
     display: flex;
     align-items: center;
     b{
         margin-right:10px;
     }
     p {
+
         margin-right: 10px;
         color:#bbb;
     }
     p:last-child {
         color: #bbb;
+
     }
 `;
 
