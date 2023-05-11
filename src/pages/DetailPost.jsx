@@ -13,7 +13,6 @@ import Loading from "./Loading";
 const DetailPost = () => {
     const params = useParams();
     const id = Number(params.id);
-    // console.log("id",id);
     const {isLoading, isError, data} = useQuery("todos", ()=>getDetailPage(id));
     console.log(data);
     const dispatch = useDispatch();
@@ -34,9 +33,9 @@ const DetailPost = () => {
                 <HeadWrapper>
                     <StyledGoBackButton />
                 </HeadWrapper>
-                <RecruitmentTitle title={data.title} nickname={data.nickname} userId={data.userID} boardId={id} createdAt={data.createdAt}/>
+                <RecruitmentTitle title={data.title} nickname={data.nickname} userId={data.userId} boardId={id} createdAt={data.createdAt}/>
                 <StyledHr />
-                <ApplySection date={data.date} memberNum={data.memberNum} totalMember={data.totalMember} applyUsers={data.applyUsers} boardId={id}/>
+                <ApplySection date={data.date} memberNum={data.memberNum} totalMember={data.totalMember} applyUsers={data.applyUsers} applyUserId={data.applyUserId} boardId={id}/>
                 <StyledHr />
                 <RecruitmentInfo contents={data.contents} />
                 <StyledHr />

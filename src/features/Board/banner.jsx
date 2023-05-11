@@ -44,21 +44,21 @@ const BannerContainer = styled.section`
 
     @media screen and (max-width: 1199px) {
         & .center-wrapper {
-        width: 90%;
+        width: 80%;
         
         }
         & .banner-text-contents {
         }
         & h1 {
-            font-size: 22px;
+            font-size: 30px;
             margin: 0;
         }
         & p {
-            font-size: 18px;
+            font-size: 20px;
             margin: 0;
         }
         & img {
-            width: 250px;
+            width: 300px;
         }
     };
     @media screen and (max-width: 700px) {

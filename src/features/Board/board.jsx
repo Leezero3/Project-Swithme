@@ -7,19 +7,19 @@ import study from '../../assets/board-study-book.png';
 import project from '../../assets/board-project-highfive.png';
 import Badge from './badge';
 import { useNavigate } from 'react-router-dom';
-import Loading from 'pages/Loading';
+import { Loading, Error } from 'pages/index';
 
 function Board() {
     const { isLoading, isError, data } = useQuery("getStudy", getStudyList);
     const navigate = useNavigate();
     
-    console.log(data);
+    // console.log(data);
 
     if (isLoading) {
         return <Loading />;
     };
     if (isError) {
-        return <h1>오류가 발생하였습니다...</h1>;
+        return <Error />;
     };
     const goDetailPage = (item) =>{
         // console.log(state)
@@ -29,14 +29,14 @@ function Board() {
   return (
     <CardContainer>
         {data.map((item) => {
-            const isClosed = item.totalMember === item.memberNum || new Date(item.date) < new Date();
+            const isClosed = item.totalMember === item.memberNum || new Date(item.date) <= new Date();
             return (
             <Card key={item.boardId} onClick={() => goDetailPage(item)} className={isClosed ? "closed" : ""}>
                 <CardTypeImg src={item.type === "project"? project : study} alt="게시물 타입"/>
                 <CiCircleChevRight className='GoDetail'/>
                 <CardTitle>{item.title}</CardTitle>
                 <CardDate>마감 : {item.date}</CardDate>
-                <CardMember>인원 : <b>{item.totalMember}</b> / {item.memberNum}</CardMember>
+                <CardMember>인원 : {item.memberNum} / <b>{item.totalMember}</b> </CardMember>
                 {/* <CardContents>{item.contents}</CardContents> */}
                 <BadgeArea>
                     <Badge type="groupType" groupType={item.type}>{item.type}</Badge>
@@ -98,15 +98,15 @@ const Card = styled.div`
             background-color:#aaaaaa;
         }
         &:after{
-            content:"closed";
+            content:"마 감";
             position:absolute;
             top:50%;
             left:48%;
             display:block;
             font-size:80px;
             font-weight:900;
-            color:#333;
-            transform:translate(-50%, -50%) rotate(-30deg);
+            color:#666;
+            transform:translate(-50%, -50%);
         }
     }
 `

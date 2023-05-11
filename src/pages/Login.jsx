@@ -35,6 +35,7 @@ function Login() {
         onSuccess: (response) => {
             dispatch(token(response.token));
             localStorage.setItem("access_token", response.token);
+            localStorage.setItem("userid", response.data.userid);
             console.log("성공");
             navigate("/");
         },

@@ -26,7 +26,6 @@ function Badge({children, type, memberNum, totalMemberNum, closeDate, ...rest}) 
             // console.log('close', 'true');
             return true;
         } else {
-            console.log(Math.floor(calcDate / (1000*60*60*24)));
             // console.log('close', 'false');
             return false;
         }

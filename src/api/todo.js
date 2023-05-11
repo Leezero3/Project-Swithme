@@ -36,7 +36,7 @@ const getDetailPage = async (id) => {
 
 // DetailPost : 모임 신청하기
 const applyGroupRequest = async ({boardId, authorization}) => {
-    console.log("APIboardId",boardId)
+    console.log("신청boardId", authorization)
     try{
         const response = await axios.post(`${process.env.REACT_APP_SERVER_URL}/applicants`, 
             { boardId },
@@ -49,11 +49,20 @@ const applyGroupRequest = async ({boardId, authorization}) => {
 };
 
 // DetailPost : 모임 신청 취소하기
-const cancelApplyGroupRequest = async (authorization) => {
+const cancelApplyGroupRequest = async ({boardId, authorization}) => {
+    console.log("취소boardId", boardId)
+    console.log("취소authorization", authorization)
     try{
-        const response = await axios.delete(`${process.env.REACT_APP_SERVER_URL}/applicants`,{
-            headers: { authorization: `${authorization}`}
-        });
+        const response = await axios.delete(`${process.env.REACT_APP_SERVER_URL}/applicants`, 
+        { 
+            data: { 
+                boardId 
+            },
+            headers: { 
+                authorization: `${authorization}`
+            }
+        }
+        );
         return response;
     } catch(error){
         return Promise.reject(error.reponse);

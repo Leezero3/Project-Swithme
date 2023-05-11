@@ -18,13 +18,13 @@ function Comments() {
     const mutation = useMutation(addComments, {
         onSuccess: (response) => {
             // queryClient.invalidateQueries("쿼리키 참조 필요"); // 쿼리키 - detailPost
-            console.log(response.data);
+            // console.log(response.data);
         },
     });
 
     const { isLoading, isError, data } = useQuery("comments", () => getComments(boardId));
 
-    console.log(data);
+    // console.log(data);
 
     const [commentData, setCommentData] = useState({
         comment: "",

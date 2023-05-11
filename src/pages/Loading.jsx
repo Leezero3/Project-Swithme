@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components';
-import loading from '../assets/loading-reload.png';
+import loading from '../assets/loading-hourglass.png';
 
 function Loading() {
   return (
@@ -18,16 +18,19 @@ const LoadingAni = styled.div`
     height:200px;
     margin-top:100px;
     text-align:center;
-    /* color:#f85151; */
+    color:#2e58ff;
     font-size:1rem;
     font-weight:500;
     & > .loading{
-        width:150px;
-        height:150px;
-        animation: loading 3s linear infinite;
+        width:120px;
+        height:120px;
+        animation: loading 5s ease-in-out infinite;
         @keyframes loading {
-            100% {
-                transform:rotate(360deg);
+            50%{
+                transform:rotate(180deg);
+            }
+            100%{
+                transform:rotate(0deg);
             } 
         }
     }
