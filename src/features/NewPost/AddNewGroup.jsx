@@ -15,15 +15,16 @@ import { addNewGroupPosting, editGroupPosting } from 'api/todo';
 function AddNewGroup({toEditPost}) {
     const queryClient = useQueryClient();
     const Post = useSelector((state) => state.editPostStore.post);
-    const jwt = localStorage.getItem("access_token");
-    // console.log('jwt',jwt)
+    const authorization = localStorage.getItem("access_token");
+    // console.log('Post',Post)
 
     const [newGroup, setNewGroup] = useState({
       type:"project",
       title:"",
       date:"",
       totalMember:"",
-      contents:""
+      contents:"",
+      nickname:""
     });
 
     const isThisEditPage = () => {
@@ -67,6 +68,9 @@ function AddNewGroup({toEditPost}) {
        onSuccess: () => {
         alert('모임을 만들었습니다!');
         navigate('/');
+       },
+       onError: (error) => {
+        alert(error)
        } 
     });
     const putMutation = useMutation(editGroupPosting,{
@@ -85,29 +89,31 @@ function AddNewGroup({toEditPost}) {
       // 수정페이지일 땐 수정요청보내기
       if (toEditPost !== null){
         const editPost = {
-          id:Post.id,
+          id:Post.boardId,
           type: newGroup.type,
           title: newGroup.title,
           date: startDate.toLocaleDateString(),
           totalMember: memberCounter,
           contents: newGroup.contents,
           // startDate와 memberCounter 추가
-          startDate: startDate.toISOString(), // ISO8601 문자열 형태로 저장
-          memberCounter: memberCounter,
+          // startDate: startDate.toISOString(), // ISO8601 문자열 형태로 저장
+          // memberCounter: memberCounter,
         };
-        putMutation.mutate({editPost, jwt});
+        console.log("editPost",editPost)
+        putMutation.mutate({editPost, authorization});
       } else {
         const newPost = {
           type: newGroup.type,
           title: newGroup.title,
           date: startDate.toLocaleDateString(),
           totalMember: memberCounter,
-          contents: newGroup.contents,
+          contents: newGroup.contents
           // startDate와 memberCounter 추가
-          startDate: startDate.toISOString(), // ISO8601 문자열 형태로 저장
-          memberCounter: memberCounter,
+          // startDate: startDate.toISOString(), // ISO8601 문자열 형태로 저장
+          // memberCounter: memberCounter,
         };
-        mutation.mutate({newPost, jwt});
+        console.log("jwt",authorization)
+        mutation.mutate({newPost, authorization});
       }
     };
     

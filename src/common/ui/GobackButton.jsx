@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { AiOutlineArrowLeft } from "react-icons/ai";
+
 import { useNavigate } from "react-router-dom";
 
 function GobackButton() {

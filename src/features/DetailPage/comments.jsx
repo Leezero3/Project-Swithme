@@ -21,6 +21,7 @@ function Comments() {
         },
         onError: (error) => {
             alert(`${error} 댓글을 추가하는데 실패했습니다`);
+
         },
     });
 
@@ -35,8 +36,8 @@ function Comments() {
         },
     });
 
+
     const { isLoading, isError, data } = useQuery("comments", () => getComments(boardId));
-    // console.log(`서버에서 받아온 값`, data);
 
     // 댓글 추가시 서버로 보내는 state
     const [commentData, setCommentData] = useState({

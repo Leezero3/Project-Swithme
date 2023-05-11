@@ -8,15 +8,13 @@ import { useLocation, useParams, useNavigate } from "react-router-dom";
 import { GoBackButton } from "common/ui/index";
 import { useDispatch, useSelector } from "react-redux";
 import { setPost } from "redux/modules/editPost";
+import Loading from "./Loading";
 
 const DetailPost = () => {
     const params = useParams();
     const id = Number(params.id);
-
-    // console.log(id);
-    const { isLoading, isError, data } = useQuery("todos", () => getDetailPage(id));
-
-    // console.log(data);
+    const {isLoading, isError, data} = useQuery("todos", ()=>getDetailPage(id));
+    console.log(data);
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
@@ -24,7 +22,7 @@ const DetailPost = () => {
     dispatch(setPost(data));
 
     if (isLoading) {
-        return <h1>로딩중입니다...</h1>;
+        return <Loading />
     }
     if (isError) {
         return <h1>오류가 발생하였습니다...</h1>;
@@ -36,15 +34,10 @@ const DetailPost = () => {
                     <StyledGoBackButton />
                 </HeadWrapper>
 
-                <RecruitmentTitle title={data.title} nickname={data.nickname} userId={data.userID} boardId={id} />
+                <RecruitmentTitle title={data.title} nickname={data.nickname} userId={data.userId} boardId={id} createdAt={data.createdAt}/>
 
                 <StyledHr />
-                <ApplySection
-                    date={data.date}
-                    memberNum={data.memberNum}
-                    totalMember={data.totalMember}
-                    applyUsers={data.applyUsers}
-                />
+                <ApplySection date={data.date} memberNum={data.memberNum} totalMember={data.totalMember} applyUsers={data.applyUsers} applyUserId={data.applyUserId} boardId={id}/>
                 <StyledHr />
                 <RecruitmentInfo contents={data.contents} />
                 <StyledHr />

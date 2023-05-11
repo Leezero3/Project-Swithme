@@ -23,7 +23,7 @@ function Login() {
     };
 
     const loginButtonHandler = (event) => {
-        event.preventDefault(); // 리랜더링 한번 더 확인 ✅
+        event.preventDefault(); 
         if (loginFormData.username !== "" && loginFormData.password !== "") {
             mutation.mutate(loginFormData);
         } else {
@@ -35,6 +35,8 @@ function Login() {
         onSuccess: (response) => {
             localStorage.setItem("access_token", response.token);
             dispatch(token(response.token));
+            localStorage.setItem("userid", response.data.userid);
+
             console.log("성공");
             navigate("/");
         },

@@ -2,58 +2,55 @@ import { getStudyList } from "api/todo";
 import React, { useEffect } from "react";
 import { useMutation, useQuery, useQueryClient } from "react-query";
 import { CiCircleChevRight } from "react-icons/ci";
-import styled, { css } from "styled-components";
-import study from "../../assets/board-study-book.png";
-import project from "../../assets/board-project-highfive.png";
-import Badge from "./badge";
-import { useNavigate } from "react-router-dom";
-import Loading from "pages/Loading";
+
+import styled, { css } from 'styled-components';
+import study from '../../assets/board-study-book.png';
+import project from '../../assets/board-project-highfive.png';
+import Badge from './badge';
+import { useNavigate } from 'react-router-dom';
+import { Loading, Error } from 'pages/index';
+
 
 function Board() {
     const { isLoading, isError, data } = useQuery("getStudy", getStudyList);
     const navigate = useNavigate();
 
-    console.log(data);
 
     if (isLoading) {
         return <Loading />;
     }
     if (isError) {
-        return <h1>오류가 발생하였습니다...</h1>;
-    }
-    const goDetailPage = (item) => {
+        return <Error />;
+    };
+    const goDetailPage = (item) =>{
+
         // console.log(state)
         navigate(`/detail/${item.boardId}`);
     };
 
-    return (
-        <CardContainer>
-            {data.map((item) => (
-                <Card key={item.boardId} onClick={() => goDetailPage(item)}>
-                    <CardTypeImg src={item.type === "project" ? project : study} alt="게시물 타입" />
-                    <CiCircleChevRight className="GoDetail" />
-                    <CardTitle>{item.title}</CardTitle>
-                    <CardDate>마감 : {item.date}</CardDate>
-                    <CardMember>
-                        인원 : <b>{item.totalMember}</b> / {item.memberNum}
-                    </CardMember>
-                    {/* <CardContents>{item.contents}</CardContents> */}
-                    <BadgeArea>
-                        <Badge type="groupType" groupType={item.type}>
-                            {item.type}
-                        </Badge>
-                        <Badge type="closeMember" memberNum={item.memberNum} totalMemberNum={item.totalMember}>
-                            정원임박🔥
-                        </Badge>
-                        <Badge type="closeDate" closeDate={item.date}>
-                            마감임박⏱️
-                        </Badge>
-                    </BadgeArea>
-                </Card>
-            ))}
-        </CardContainer>
-    );
-}
+  return (
+    <CardContainer>
+        {data.map((item) => {
+            const isClosed = item.totalMember === item.memberNum || new Date(item.date) <= new Date();
+            return (
+            <Card key={item.boardId} onClick={() => goDetailPage(item)} className={isClosed ? "closed" : ""}>
+                <CardTypeImg src={item.type === "project"? project : study} alt="게시물 타입"/>
+                <CiCircleChevRight className='GoDetail'/>
+                <CardTitle>{item.title}</CardTitle>
+                <CardDate>마감 : {item.date}</CardDate>
+                <CardMember>인원 : {item.memberNum} / <b>{item.totalMember}</b> </CardMember>
+                {/* <CardContents>{item.contents}</CardContents> */}
+                <BadgeArea>
+                    <Badge type="groupType" groupType={item.type}>{item.type}</Badge>
+                    <Badge type="closeMember" memberNum={item.memberNum} totalMemberNum={item.totalMember}>정원임박🔥</Badge>
+                    <Badge type="closeDate" closeDate={item.date}>마감임박⏱️</Badge>
+                </BadgeArea>
+            </Card>
+            )        
+        })}
+    </CardContainer>
+  );
+};
 
 export default Board;
 
@@ -67,11 +64,12 @@ const CardContainer = styled.section`
     gap: 30px;
 `;
 const Card = styled.div`
-    position: relative;
-    width: 30%;
-    min-width: 300px;
-    height: 350px;
-    border: 1px solid #e7e7e7;
+
+    position:relative;
+    width:30%;
+    min-width:345px;
+    height:350px;
+    border:1px solid #e7e7e7;
     padding: 40px 30px;
     box-sizing: border-box;
     border-radius: 30px;
@@ -90,7 +88,33 @@ const Card = styled.div`
     &:hover {
         transform: scale(1.03);
     }
-`;
+
+
+    &.closed{
+        background-color:#ccc;
+        color:#777;
+        &>img{
+            filter: grayscale(100%);
+        }
+        &>div p{
+            filter: grayscale(100%);
+            color:#777;
+            background-color:#aaaaaa;
+        }
+        &:after{
+            content:"마 감";
+            position:absolute;
+            top:50%;
+            left:48%;
+            display:block;
+            font-size:80px;
+            font-weight:900;
+            color:#666;
+            transform:translate(-50%, -50%);
+        }
+    }
+`
+
 const CardTitle = styled.p`
     font-weight: 700;
     font-size: 22px;
