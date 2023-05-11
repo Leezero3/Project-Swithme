@@ -4,7 +4,7 @@ import styled from "styled-components";
 
 function Layout({ children }) {
     return (
-        <>  
+        <>
             <StLayout>{children}</StLayout>
         </>
     );
@@ -14,9 +14,10 @@ export default Layout;
 
 const StLayout = styled.div`
     max-width: 1200px;
-    margin: 30px auto;
+    margin: 30px auto 150px auto;
+    /* margin: 30px auto; */
     display: flex;
     align-items: center;
-    justify-content: center; 
+    justify-content: center;
     /* justify-content: space-between;*/
 `;

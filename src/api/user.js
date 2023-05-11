@@ -2,7 +2,7 @@ import axios from "axios";
 
 // 회원가입
 const addUsers = async (newUserData) => {
-    console.log(newUserData);
+    console.log(`asdfasdfasdfsadf`, newUserData);
     try {
         const response = await axios.post(`${process.env.REACT_APP_SERVER_URL}/users/signup`, newUserData, {
             withCredentials: true,

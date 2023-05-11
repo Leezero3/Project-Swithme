@@ -23,8 +23,8 @@ function Login() {
     };
 
     const loginButtonHandler = (event) => {
+        event.preventDefault(); // 리랜더링 한번 더 확인 ✅
         if (loginFormData.username !== "" && loginFormData.password !== "") {
-            event.preventDefault(); // 리랜더링 한번 더 확인 ✅
             mutation.mutate(loginFormData);
         } else {
             alert("ID와 PASSWORD를 모두 입력하셔야 합니다!");
@@ -33,8 +33,8 @@ function Login() {
 
     const mutation = useMutation(userLogin, {
         onSuccess: (response) => {
-            dispatch(token(response.token));
             localStorage.setItem("access_token", response.token);
+            dispatch(token(response.token));
             console.log("성공");
             navigate("/");
         },
@@ -66,10 +66,11 @@ function Login() {
 export default Login;
 
 const Container = styled.div`
+    height: 60vh;
     margin-top: 4%;
     display: flex;
     flex-direction: column;
-    /* justify-content: center; */
+    justify-content: center;
     align-items: center;
 `;
 

@@ -1,11 +1,11 @@
 import React from "react";
 import styled, { createGlobalStyle } from "styled-components";
 
-import { useNavigate } from 'react-router-dom';
-import { useMutation, useQuery, useQueryClient } from 'react-query'
+import { useNavigate } from "react-router-dom";
+import { useMutation, useQuery, useQueryClient } from "react-query";
 import { deleteGroupPosting } from "api/todo";
 
-function RecruitmentTitle({title, nickname, userId, boardId, createAt}) {
+function RecruitmentTitle({ title, nickname, userId, boardId, createAt }) {
     const jwt = localStorage.getItem("access_token");
     // 현재 접속한 myId와 작성자의 userId가 일치하면 수정|삭제 가능하도록
     const AmIWriter = (userId) => {
@@ -17,38 +17,37 @@ function RecruitmentTitle({title, nickname, userId, boardId, createAt}) {
         }
     };
 
-    console.log('boardId',boardId)
+    // console.log('boardId',boardId)
 
     const navigate = useNavigate();
     const queryClient = useQueryClient();
 
-    const mutation = useMutation(deleteGroupPosting,{
+    const mutation = useMutation(deleteGroupPosting, {
         onSuccess: () => {
-          queryClient.invalidateQueries('todos');
-          alert('모집 글이 삭제되었습니다!');
-          navigate('/');
+            queryClient.invalidateQueries("todos");
+            alert("모집 글이 삭제되었습니다!");
+            navigate("/");
         },
         onError: (error) => {
-          alert('글 삭제가 실패했습니다 ㅜㅠ');
-        }
+            alert("글 삭제가 실패했습니다 ㅜㅠ");
+        },
     });
 
     const removeHandler = () => {
-        mutation.mutate({boardId, jwt});
+        mutation.mutate({ boardId, jwt });
     };
-    
+
     return (
         <Container>
             <Title>{title}</Title>
             <PostMetaSectionWrapper>
                 <AuthorWrapper>
                     <b>작성자</b>
-                    <p>{nickname}</p>
+                    <p> {nickname}</p>
                     <p> | {createAt}</p>
                 </AuthorWrapper>
                 <ButtonWrapper show={AmIWriter(userId)}>
-
-                    <EditDeleteButton onClick={() => navigate('/new-post',{state: boardId})}>수정</EditDeleteButton>
+                    <EditDeleteButton onClick={() => navigate("/new-post", { state: boardId })}>수정</EditDeleteButton>
                     <ButtonSeperator />
                     <EditDeleteButton onClick={() => removeHandler()}>삭제</EditDeleteButton>
                 </ButtonWrapper>
@@ -81,14 +80,11 @@ const PostMetaSectionWrapper = styled.div`
 
 const AuthorWrapper = styled.div`
     font-size: 15px;
-    min-width: 200px;
+    min-width: 700px;
     display: flex;
     align-items: center;
     p {
-        margin-right: 15px;
-    }
-    p:last-child {
-        color: #ccc;
+        margin: 20px;
     }
 `;
 
